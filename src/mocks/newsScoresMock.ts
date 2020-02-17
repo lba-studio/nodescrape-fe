@@ -1,0 +1,482 @@
+export default [
+  {
+    "score":0.03816592634027202,
+    "id":"fortune",
+    "url":"http://fortune.com",
+    "name":"Fortune",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.08251119086220571,
+    "id":"espn",
+    "url":"http://espn.go.com",
+    "name":"ESPN",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.038607545322840164,
+    "id":"polygon",
+    "url":"http://www.polygon.com",
+    "name":"Polygon",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.12553495557325878,
+    "id":"nfl-news",
+    "url":"http://www.nfl.com/news",
+    "name":"NFL News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.052579192810218736,
+    "id":"national-review",
+    "url":"https://www.nationalreview.com/",
+    "name":"National Review",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.08251119086220571,
+    "id":"abc-news",
+    "url":"https://abcnews.go.com",
+    "name":"ABC News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.005600690809684741,
+    "id":"associated-press",
+    "url":"https://apnews.com/",
+    "name":"Associated Press",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.17647058823529413,
+    "id":"mtv-news-uk",
+    "url":"http://www.mtv.co.uk/news",
+    "name":"MTV News (UK)",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.004886186629031806,
+    "id":"business-insider",
+    "url":"http://www.businessinsider.com",
+    "name":"Business Insider",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.10069758087454977,
+    "id":"news24",
+    "url":"http://www.news24.com",
+    "name":"News24",
+    "country":"za",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.006201765675664321,
+    "id":"cnbc",
+    "url":"http://www.cnbc.com",
+    "name":"CNBC",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.029181592733797758,
+    "id":"hacker-news",
+    "url":"https://news.ycombinator.com",
+    "name":"Hacker News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.08888362600791051,
+    "id":"cbc-news",
+    "url":"http://www.cbc.ca/news",
+    "name":"CBC News",
+    "country":"ca",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.10109293884463708,
+    "id":"news-com-au",
+    "url":"http://www.news.com.au",
+    "name":"News.com.au",
+    "country":"au",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.0007191350505262838,
+    "id":"the-hindu",
+    "url":"http://www.thehindu.com",
+    "name":"The Hindu",
+    "country":"in",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.09238987034610154,
+    "id":"msnbc",
+    "url":"http://www.msnbc.com",
+    "name":"MSNBC",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.15233194847640785,
+    "id":"the-washington-times",
+    "url":"https://www.washingtontimes.com/",
+    "name":"The Washington Times",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.19661256936156973,
+    "id":"entertainment-weekly",
+    "url":"http://www.ew.com",
+    "name":"Entertainment Weekly",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.04245767901842523,
+    "id":"football-italia",
+    "url":"http://www.football-italia.net",
+    "name":"Football Italia",
+    "country":"it",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.040198295527087306,
+    "id":"ars-technica",
+    "url":"http://arstechnica.com",
+    "name":"Ars Technica",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.021212500572716037,
+    "id":"usa-today",
+    "url":"http://www.usatoday.com/news",
+    "name":"USA Today",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.1062881318893496,
+    "id":"bleacher-report",
+    "url":"http://www.bleacherreport.com",
+    "name":"Bleacher Report",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.08116535781530232,
+    "id":"mashable",
+    "url":"https://mashable.com",
+    "name":"Mashable",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.020758177996025973,
+    "id":"breitbart-news",
+    "url":"http://www.breitbart.com",
+    "name":"Breitbart News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.05080850999710096,
+    "id":"al-jazeera-english",
+    "url":"http://www.aljazeera.com",
+    "name":"Al Jazeera English",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.014164530981971221,
+    "id":"time",
+    "url":"http://time.com",
+    "name":"Time",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.013060252379609734,
+    "id":"nhl-news",
+    "url":"https://www.nhl.com/news",
+    "name":"NHL News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.024398880609144576,
+    "id":"the-irish-times",
+    "url":"https://www.irishtimes.com",
+    "name":"The Irish Times",
+    "country":"ie",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.10734728186000835,
+    "id":"new-york-magazine",
+    "url":"http://nymag.com",
+    "name":"New York Magazine",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.000673025173525646,
+    "id":"cbs-news",
+    "url":"http://www.cbsnews.com",
+    "name":"CBS News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.06858481008139139,
+    "id":"the-washington-post",
+    "url":"https://www.washingtonpost.com",
+    "name":"The Washington Post",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.14285714285714285,
+    "id":"four-four-two",
+    "url":"http://www.fourfourtwo.com/news",
+    "name":"FourFourTwo",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.01595071872031671,
+    "id":"the-wall-street-journal",
+    "url":"http://www.wsj.com",
+    "name":"The Wall Street Journal",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.03075295355129932,
+    "id":"fox-sports",
+    "url":"http://www.foxsports.com",
+    "name":"Fox Sports",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.06615092922088665,
+    "id":"bbc-news",
+    "url":"http://www.bbc.co.uk/news",
+    "name":"BBC News",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.11322936040268997,
+    "id":"financial-post",
+    "url":"http://business.financialpost.com",
+    "name":"Financial Post",
+    "country":"ca",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.004886186629031806,
+    "id":"business-insider-uk",
+    "url":"http://uk.businessinsider.com",
+    "name":"Business Insider (UK)",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.06276289764708458,
+    "id":"new-scientist",
+    "url":"https://www.newscientist.com/section/news",
+    "name":"New Scientist",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.09325563218858507,
+    "id":"reddit-r-all",
+    "url":"https://www.reddit.com/r/all",
+    "name":"Reddit /r/all",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.05810014881962505,
+    "id":"espn-cric-info",
+    "url":"http://www.espncricinfo.com/",
+    "name":"ESPN Cric Info",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.0026058572234413406,
+    "id":"nbc-news",
+    "url":"http://www.nbcnews.com",
+    "name":"NBC News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.08474038419995399,
+    "id":"medical-news-today",
+    "url":"http://www.medicalnewstoday.com",
+    "name":"Medical News Today",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.1010423372026241,
+    "id":"fox-news",
+    "url":"http://www.foxnews.com",
+    "name":"Fox News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.019849425233522983,
+    "id":"mtv-news",
+    "url":"http://www.mtv.com/news",
+    "name":"MTV News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.019843607445285107,
+    "id":"buzzfeed",
+    "url":"https://www.buzzfeed.com",
+    "name":"Buzzfeed",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.04635812985111786,
+    "id":"the-american-conservative",
+    "url":"http://www.theamericanconservative.com/",
+    "name":"The American Conservative",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.0353140642500124,
+    "id":"rte",
+    "url":"https://www.rte.ie/news",
+    "name":"RTE",
+    "country":"ie",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.07872951120903951,
+    "id":"independent",
+    "url":"http://www.independent.co.uk",
+    "name":"Independent",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.06615092922088665,
+    "id":"bbc-sport",
+    "url":"http://www.bbc.co.uk/sport",
+    "name":"BBC Sport",
+    "country":"gb",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.0018623369501623009,
+    "id":"national-geographic",
+    "url":"http://news.nationalgeographic.com",
+    "name":"National Geographic",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.06534273893716729,
+    "id":"australian-financial-review",
+    "url":"http://www.afr.com",
+    "name":"Australian Financial Review",
+    "country":"au",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.1068698836246619,
+    "id":"vice-news",
+    "url":"https://news.vice.com",
+    "name":"Vice News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.02675692001538704,
+    "id":"techradar",
+    "url":"http://www.techradar.com",
+    "name":"TechRadar",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.07549807493068703,
+    "id":"abc-news-au",
+    "url":"http://www.abc.net.au/news",
+    "name":"ABC News (AU)",
+    "country":"au",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.1437554941519095,
+    "id":"the-hill",
+    "url":"http://thehill.com",
+    "name":"The Hill",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.0024144797875823715,
+    "id":"the-verge",
+    "url":"http://www.theverge.com",
+    "name":"The Verge",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.0010376854353136293,
+    "id":"politico",
+    "url":"https://www.politico.com",
+    "name":"Politico",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.02941503154814177,
+    "id":"the-globe-and-mail",
+    "url":"https://www.theglobeandmail.com",
+    "name":"The Globe And Mail",
+    "country":"ca",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":0.06676125773907013,
+    "id":"the-next-web",
+    "url":"http://thenextweb.com",
+    "name":"The Next Web",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  },
+  {
+    "score":-0.05199368354028121,
+    "id":"crypto-coins-news",
+    "url":"https://www.ccn.com",
+    "name":"Crypto Coins News",
+    "country":"us",
+    "retrievedFrom":"https://newsapi.org"
+  }
+];
