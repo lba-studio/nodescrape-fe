@@ -37,7 +37,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           <Typography variant="h1">News Neutrality Scraper</Typography>
           <Typography variant="subtitle1">How positive/negative is your news source?</Typography>
           <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            <Button color="primary" variant="contained">How does this work?</Button>
+            <Button color="primary" variant="contained" disabled={true}>How does this work? (coming soon)</Button>
           </Box>
         </PageSection>
         <PageSection>
