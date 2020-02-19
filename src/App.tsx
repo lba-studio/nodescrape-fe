@@ -6,6 +6,7 @@ import NewsSourceScoreService, { NewsSourceScore } from './services/NewsSourceSc
 import NewsScoreCard from './components/NewsScoreCard';
 import AverageNewsScoreCard from './components/AverageNewsScoreCard';
 import PageSection from './components/PageSection';
+import Footer from './components/Footer';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -56,6 +57,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
                 <NewsScoreCard newsSourceScore={newsSourceScore} position={index + 1} />)}
           </Box>
         </PageSection>
+        <Footer />
       </div>
     </MuiThemeProvider>
   );
