@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Typography, MuiThemeProvider, Theme, createStyles, Button, withStyles, WithStyles, Box, Link } from '@material-ui/core';
+import { Typography, MuiThemeProvider, Theme, createStyles, Button, withStyles, WithStyles, Box } from '@material-ui/core';
 import { appTheme } from './styles';
 import NewsSourceScoreService, { NewsSourceScore } from './services/NewsSourceScoreService';
 import NewsScoreCard from './components/NewsScoreCard';

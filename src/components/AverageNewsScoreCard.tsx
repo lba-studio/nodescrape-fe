@@ -1,7 +1,6 @@
 import React from 'react';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import NewsScoreCard from './NewsScoreCard';
-import { Card, CardHeader, Box, CardContent, createStyles, withStyles, WithStyles } from '@material-ui/core';
+import { Card, Box, CardContent, createStyles, withStyles, WithStyles } from '@material-ui/core';
 
 const styles = createStyles({
   score: {

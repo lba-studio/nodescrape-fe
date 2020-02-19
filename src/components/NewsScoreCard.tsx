@@ -21,7 +21,7 @@ const styles = (theme: Theme) => createStyles({
 
 
 const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = (props) => {
-  const { variant, position, classes, newsSourceScore } = props;
+  const { position, classes, newsSourceScore } = props;
   return (
     <div>
       <Card className={classes.root}>
