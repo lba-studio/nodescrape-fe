@@ -1,10 +1,14 @@
 import React from 'react';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import { Card, Box, CardContent, createStyles, withStyles, WithStyles } from '@material-ui/core';
+import { Card, Box, CardContent, createStyles, withStyles, WithStyles, Typography, Theme } from '@material-ui/core';
 
-const styles = createStyles({
+const styles = (theme: Theme) => createStyles({
   score: {
-    backgroundColor: 'orange'
+    // backgroundColor: 'orange',
+    paddingLeft: theme.spacing(1),
+  },
+  label: {
+    paddingRight: theme.spacing(1),
   }
 });
 
@@ -19,13 +23,13 @@ const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp & WithStyles<typeo
   if (firstElement) {
     average = newsSourceScores.reduce((acc, curr) => (acc + curr.score) / 2, firstElement.score);
   } else {
-    return <></>;
+    return <Typography>Cannot get average score if there are no scores to begin with. Please try again later.</Typography>;
   }
   return (
     <Card>
       <CardContent>
         <Box display="flex" flexDirection="row">
-          <div>
+          <div className={classes.label}>
             Average News Score:
           </div>
           <div className={classes.score}>

@@ -44,19 +44,21 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           {isLoading && <Typography>Loading data...</Typography>}
           {error && <Typography color="error">An error has occurred. Please try again later.</Typography>}
         </PageSection>
-        <PageSection>
-          <Typography variant="h2">Interesting tidbits</Typography>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
-          </Box>
-        </PageSection>
-        <PageSection>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            {newsSourceScores
-              .map((newsSourceScore, index) =>
-                <NewsScoreCard newsSourceScore={newsSourceScore} position={index + 1} />)}
-          </Box>
-        </PageSection>
+        {!isLoading && !error && <>
+          <PageSection>
+            <Typography variant="h2">Interesting tidbits</Typography>
+            <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
+              <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
+            </Box>
+          </PageSection>
+          <PageSection>
+            <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
+              {newsSourceScores
+                .map((newsSourceScore, index) =>
+                  <NewsScoreCard newsSourceScore={newsSourceScore} position={index + 1} />)}
+            </Box>
+          </PageSection>
+        </>}
         <Footer />
       </div>
     </MuiThemeProvider>
