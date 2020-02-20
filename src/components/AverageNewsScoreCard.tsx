@@ -1,15 +1,18 @@
 import React from 'react';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import { Card, Box, CardContent, createStyles, withStyles, WithStyles, Typography, Theme } from '@material-ui/core';
+import { Card, Box, createStyles, withStyles, WithStyles, Typography, Theme } from '@material-ui/core';
+import computeColorHex from '../utils/computeColorHex';
 
 const styles = (theme: Theme) => createStyles({
   score: {
     // backgroundColor: 'orange',
-    paddingLeft: theme.spacing(1),
+    margin: 'auto',
+    padding: theme.spacing(2),
   },
   label: {
-    paddingRight: theme.spacing(1),
-  }
+    padding: theme.spacing(2),
+    margin: 'auto'
+  },
 });
 
 interface AverageNewsScoreCardProp {
@@ -27,16 +30,14 @@ const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp & WithStyles<typeo
   }
   return (
     <Card>
-      <CardContent>
-        <Box display="flex" flexDirection="row">
-          <div className={classes.label}>
-            Average News Score:
-          </div>
-          <div className={classes.score}>
-            {average}
-          </div>
-        </Box>
-      </CardContent>
+      <Box display="flex" flexDirection="row">
+        <div className={classes.label}>
+          Average News Score:
+        </div>
+        <div className={classes.score} style={{ backgroundColor: computeColorHex(average) }}>
+          {average.toFixed(4)}
+        </div>
+      </Box>
     </Card>
     || <></>
   );

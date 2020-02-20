@@ -11,6 +11,8 @@ export interface NewsSourceScore {
   url: string;
   retrievedFrom?: string;
   name: string;
+  lastUpdatedMs: number;
+  country: string;
 };
 
 export default {

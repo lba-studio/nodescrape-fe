@@ -1,7 +1,8 @@
-import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar } from "@material-ui/core";
+import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider } from "@material-ui/core";
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import { green } from "@material-ui/core/colors";
+import computeColorHex from "../utils/computeColorHex";
 
 interface NewsScoreCardProps {
   newsSourceScore: NewsSourceScore;
@@ -26,7 +27,7 @@ const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = 
     <div>
       <Card className={classes.root}>
         <CardHeader
-          avatar={<Avatar style={{backgroundColor: green[500]}}>
+          avatar={<Avatar style={{ backgroundColor: computeColorHex(newsSourceScore.score) }}>
             {position}
           </Avatar>}
           className={classes.cardHeader}
@@ -35,7 +36,14 @@ const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = 
         />
         <CardContent>
           <Typography>
-            Score: {newsSourceScore.score.toFixed(2)}
+            Score: {newsSourceScore.score.toFixed(4)}
+          </Typography>
+          <Divider />
+          <Typography variant="subtitle2">
+            Retrieved from: {newsSourceScore.retrievedFrom || 'N/A'}
+          </Typography>
+          <Typography variant="subtitle2">
+            Last updated: {new Date(newsSourceScore.lastUpdatedMs).toISOString()}
           </Typography>
         </CardContent>
       </Card>

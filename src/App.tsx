@@ -28,7 +28,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
       .catch(e => setError(e))
       .finally(() => setIsLoading(false));
   }, []);
-  React.useEffect(() => console.error(error), [error]);
+  React.useEffect(() => error && console.error(error), [error]);
   const { classes } = props;
   return (
     <MuiThemeProvider theme={appTheme}>
@@ -46,7 +46,6 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
         </PageSection>
         {!isLoading && !error && <>
           <PageSection>
-            <Typography variant="h2">Interesting tidbits</Typography>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
               <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
             </Box>
@@ -55,7 +54,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
               {newsSourceScores
                 .map((newsSourceScore, index) =>
-                  <NewsScoreCard newsSourceScore={newsSourceScore} position={index + 1} />)}
+                  <NewsScoreCard key={newsSourceScore.id} newsSourceScore={newsSourceScore} position={index + 1} />)}
             </Box>
           </PageSection>
         </>}
