@@ -1,7 +1,6 @@
 import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider } from "@material-ui/core";
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
-import { green } from "@material-ui/core/colors";
 import computeColorHex from "../utils/computeColorHex";
 
 interface NewsScoreCardProps {
