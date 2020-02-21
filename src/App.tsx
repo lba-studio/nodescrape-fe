@@ -7,6 +7,7 @@ import NewsScoreCard from './components/NewsScoreCard';
 import AverageNewsScoreCard from './components/AverageNewsScoreCard';
 import PageSection from './components/PageSection';
 import Footer from './components/Footer';
+import Explanation from './components/Explanation';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -36,9 +37,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
         <PageSection>
           <Typography variant="h1">News Neutrality Scraper</Typography>
           <Typography variant="subtitle1">How positive/negative is your news source?</Typography>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            <Button color="primary" variant="contained" disabled={true}>How does this work? (coming soon)</Button>
-          </Box>
+          <Explanation />
         </PageSection>
         <PageSection>
           {isLoading && <Typography>Loading data...</Typography>}
