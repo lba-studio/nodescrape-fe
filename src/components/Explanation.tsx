@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from "@material-ui/core";
+import { Button, Box, Dialog, DialogTitle, DialogContent, DialogActions } from "@material-ui/core";
 
 export default function () {
   const [dialogOpen, setDialogOpen] = React.useState(false);
