@@ -8,19 +8,23 @@ import AverageNewsScoreCard from './components/AverageNewsScoreCard';
 import PageSection from './components/PageSection';
 import Footer from './components/Footer';
 import Explanation from './components/Explanation';
+import MedianNewsScoreCard from './components/MedianNewsScoreCard';
 
 const styles = (theme: Theme) => createStyles({
   root: {
     textAlign: 'center',
     margin: theme.spacing(4),
-  }
+  },
+  dataCard: {
+    margin: theme.spacing(2),
+  },
 });
 
 
 
 const App: React.FC<WithStyles<typeof styles>> = (props) => {
   const [newsSourceScores, setNewsSourceScores] = React.useState<Array<NewsSourceScore>>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<any | undefined>(undefined);
   useEffect(() => {
     setIsLoading(true);
@@ -46,7 +50,12 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
         {!isLoading && !error && <>
           <PageSection>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-              <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
+              <div className={classes.dataCard}>
+                <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
+              </div>
+              <div className={classes.dataCard}>
+                <MedianNewsScoreCard newsSourceScores={newsSourceScores} />
+              </div>
             </Box>
           </PageSection>
           <PageSection>

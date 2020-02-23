@@ -1,26 +1,14 @@
 import React from 'react';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import { Card, Box, createStyles, withStyles, WithStyles, Typography, Theme } from '@material-ui/core';
-import computeColorHex from '../utils/computeColorHex';
-
-const styles = (theme: Theme) => createStyles({
-  score: {
-    // backgroundColor: 'orange',
-    margin: 'auto',
-    padding: theme.spacing(2),
-  },
-  label: {
-    padding: theme.spacing(2),
-    margin: 'auto'
-  },
-});
+import { Typography } from '@material-ui/core';
+import BasicDataCard from './BasicDataCard';
 
 interface AverageNewsScoreCardProp {
   newsSourceScores: Array<NewsSourceScore>;
 }
 
-const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp & WithStyles<typeof styles>> = (props) => {
-  const { classes, newsSourceScores } = props;
+const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp> = (props) => {
+  const { newsSourceScores } = props;
   let average: number | undefined = undefined;
   let firstElement = newsSourceScores.pop();
   if (firstElement) {
@@ -29,18 +17,9 @@ const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp & WithStyles<typeo
     return <Typography>Cannot get average score if there are no scores to begin with. Please try again later.</Typography>;
   }
   return (
-    <Card>
-      <Box display="flex" flexDirection="row">
-        <div className={classes.label}>
-          Average News Score:
-        </div>
-        <div className={classes.score} style={{ backgroundColor: computeColorHex(average) }}>
-          {average.toFixed(4)}
-        </div>
-      </Box>
-    </Card>
+    <BasicDataCard label="Average news score:" data={average}/>
     || <></>
   );
 }
 
-export default withStyles(styles)(AverageNewsScoreCard);
+export default AverageNewsScoreCard;
