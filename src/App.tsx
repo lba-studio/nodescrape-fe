@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box } from '@material-ui/core';
 import { appTheme } from './styles';
@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Explanation from './components/Explanation';
 import MedianNewsScoreCard from './components/MedianNewsScoreCard';
 import MagGlassIcon from './assets/magnifying_glass_icon.svg';
+import AnalyticService from './services/AnalyticService';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -31,13 +32,14 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   const [newsSourceScores, setNewsSourceScores] = React.useState<Array<NewsSourceScore>>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<any | undefined>(undefined);
-  useEffect(() => {
+  React.useEffect(() => {
     setIsLoading(true);
     NewsSourceScoreService.getNewsScores()
       .then(res => setNewsSourceScores(res.sort((a, b) => b.score - a.score)))
       .catch(e => setError(e))
       .finally(() => setIsLoading(false));
   }, []);
+  React.useEffect(() => AnalyticService.initialize(), []);
   React.useEffect(() => error && console.error(error), [error]);
   const { classes } = props;
   return (
