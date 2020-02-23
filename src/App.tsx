@@ -9,6 +9,7 @@ import PageSection from './components/PageSection';
 import Footer from './components/Footer';
 import Explanation from './components/Explanation';
 import MedianNewsScoreCard from './components/MedianNewsScoreCard';
+import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -18,6 +19,10 @@ const styles = (theme: Theme) => createStyles({
   dataCard: {
     margin: theme.spacing(2),
   },
+  logo: {
+    maxWidth: '128px',
+    maxHeight: '128px',
+  }
 });
 
 
@@ -39,7 +44,8 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
     <MuiThemeProvider theme={appTheme}>
       <div className={classes.root}>
         <PageSection>
-          <Typography variant="h1">News Neutrality Scraper</Typography>
+          <img className={classes.logo} src={MagGlassIcon} alt="Logo" aria-label="logo" />
+          <Typography variant="h1">News Neutrality Watcher</Typography>
           <Typography variant="subtitle1">How positive/negative is your news source?</Typography>
           <Explanation />
         </PageSection>
