@@ -33,6 +33,8 @@ export default function () {
           <Typography variant="h3">Sentiment analysis pipeline? What's that?</Typography>
           <p>It sounds fancy, but it really isn't.</p>
           <p>We are currently using Amazon Comprehend, which is Amazon's natural language processing (NLP) service. In essence, it's sort of like the system that powers Amazon Echo/Google Home in the sense that it uses machine learning to understand what someone is trying to say.</p>
+          <p>When feeding stuff into our "pipeline", we get a set of scores back from Amazon Comprehend, which indicates the level of confidence that Amazon Comprehend has on whether or not a particular text is negative, positive or neutral. We then combine these scores based on the following formula [Score = Confidence of text being positive - Confidence of text being negative]</p> 
+          <p>For more information, feel free to browse our GitHub to figure out how this score is calculated.</p>
         </PageSection>
         <PageSection>
           <Typography variant="h3">Wait, so can the score be biased?</Typography>
