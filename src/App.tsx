@@ -11,6 +11,7 @@ import Explanation from './components/Explanation';
 import MedianNewsScoreCard from './components/MedianNewsScoreCard';
 import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 import AnalyticService from './services/AnalyticService';
+import ScoreChart from './components/ScoreChart';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -56,6 +57,9 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           {error && <Typography color="error">An error has occurred. Please try again later.</Typography>}
         </PageSection>
         {!isLoading && !error && <>
+          <PageSection>
+            <ScoreChart newsSourceScores={newsSourceScores} />
+          </PageSection>
           <PageSection>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
               <div className={classes.dataCard}>
