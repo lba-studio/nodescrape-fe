@@ -11,7 +11,7 @@ interface ScoreChartProps {
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
-  const [chart, setChart] = React.useState<Chart| undefined>(undefined);
+  const chartRef = React.useRef<Chart| undefined>(undefined);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -19,10 +19,10 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
     console.debug('isMobile:', isMobile);
     const canvasContext: CanvasRenderingContext2D = _.invoke(canvasRef, 'current.getContext', '2d');
     if (canvasContext) {
-      if (chart) {
-        chart.destroy();
+      if (chartRef.current) {
+        chartRef.current.destroy();
       }
-      setChart(new Chart(canvasContext, {
+      chartRef.current = new Chart(canvasContext, {
         type: 'horizontalBar',
         data: {
           labels: newsSourceScores.map(score => score.name),
@@ -57,7 +57,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
             }]
           }
         },
-      }));
+      });
       console.debug('Rendering chart.');
     }
   }, [newsSourceScores, isMobile]);
