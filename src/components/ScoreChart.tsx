@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
 import _ from 'lodash';
 import computeColorHex from '../utils/computeColorHex';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
 interface ScoreChartProps {
   newsSourceScores: Array<NewsSourceScore>;
@@ -10,14 +11,18 @@ interface ScoreChartProps {
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
+  const [chart, setChart] = React.useState<Chart| undefined>(undefined);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  console.dir(canvasRef);
-  // console.dir((canvasRef.current as HTMLCanvasElement).getContext('2d'));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   React.useEffect(() => {
-    const canvasContext = _.invoke(canvasRef, 'current.getContext', '2d');
-    console.dir(canvasContext);
+    console.debug('isMobile:', isMobile);
+    const canvasContext: CanvasRenderingContext2D = _.invoke(canvasRef, 'current.getContext', '2d');
     if (canvasContext) {
-      const chart = new Chart(canvasContext, {
+      if (chart) {
+        chart.destroy();
+      }
+      setChart(new Chart(canvasContext, {
         type: 'horizontalBar',
         data: {
           labels: newsSourceScores.map(score => score.name),
@@ -28,22 +33,43 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
               let data = _.get(ctx, `dataset.data[${ctx.dataIndex}]`, 0);
               return computeColorHex(data);
             },
+            // barThickness: 22,
           }],
         },
         options: {
-          // maintainAspectRatio: true,
+          responsive: true,
+          maintainAspectRatio: false,
           legend: {
             display: false,
           },
+          scales: {
+            yAxes: [{
+              ticks: {
+                autoSkip: false,
+              },
+              display: !isMobile,
+            }],
+            xAxes: [{
+              ticks: {
+                // autoSkip: false,
+                beginAtZero: true,
+              }
+            }]
+          }
         },
-      });
-      console.log('Chart made!');
+      }));
+      console.debug('Rendering chart.');
     }
-  }, [newsSourceScores]);
+  }, [newsSourceScores, isMobile]);
 
   return <>
-    Chart is here!
-    <canvas aria-label="graph for scores" role="img" ref={canvasRef}>Score graph</canvas>
+    <canvas
+      aria-label="graph for scores"
+      role="img"
+      ref={canvasRef}
+      style={{ minHeight: `${newsSourceScores.length * 22 || 0}px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */ }}>
+      Score graph goes here. Your browser may not support this functionality.
+      </canvas>
   </>;
 }
 
