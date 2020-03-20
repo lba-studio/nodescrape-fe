@@ -36,8 +36,16 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   React.useEffect(() => {
     setIsLoading(true);
     NewsSourceScoreService.getNewsScores()
-      .then(res => setNewsSourceScores(res.sort((a, b) => b.score - a.score)))
-      .catch(e => setError(e))
+      .then(res => {
+        if (res.length === 0) {
+          throw new Error('Unable to retrieve any score data. Please try again later.')
+        }
+        setNewsSourceScores(res.sort((a, b) => b.score - a.score));
+      })
+      .catch(e => {
+        console.error(e);
+        setError(e);
+      })
       .finally(() => setIsLoading(false));
   }, []);
   React.useEffect(() => AnalyticService.initialize(), []);
