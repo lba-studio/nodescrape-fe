@@ -9,8 +9,8 @@ interface AverageNewsScoreCardProp {
 
 const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp> = (props) => {
   const { newsSourceScores } = props;
-  let average: number | undefined = undefined;
-  let firstElement = newsSourceScores.pop();
+  let average: number;
+  let firstElement = newsSourceScores[0];
   if (firstElement) {
     average = newsSourceScores.reduce((acc, curr) => (acc + curr.score) / 2, firstElement.score);
   } else {
