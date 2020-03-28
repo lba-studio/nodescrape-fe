@@ -26,7 +26,9 @@ const styles = (theme: Theme) => createStyles({
     maxWidth: '128px',
     maxHeight: '128px',
   },
-
+  filter: {
+    flexBasis: '128px',
+  },
 });
 
 
@@ -37,6 +39,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<any | null>(null);
   const [countryFilter, setCountryFilter] = React.useState<string>(getLocation() || '');
+  const countryOptions = React.useMemo<Array<string>>(() => Array.from(new Set(newsSourceScores?.map(score => score.country))), [newsSourceScores]);
   React.useEffect(() => {
     setIsLoading(true);
     setError(null);
