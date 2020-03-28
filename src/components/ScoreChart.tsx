@@ -11,7 +11,7 @@ interface ScoreChartProps {
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
-  const chartRef = React.useRef<Chart| undefined>(undefined);
+  const chartRef = React.useRef<Chart | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -58,16 +58,15 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           }
         },
       });
-      console.debug('Rendering chart.');
+      console.debug('Rendering chart.', newsSourceScores);
     }
   }, [newsSourceScores, isMobile]);
-
   return <>
     <canvas
       aria-label="graph for scores"
       role="img"
       ref={canvasRef}
-      style={{ minHeight: `${newsSourceScores.length * 22 || 0}px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */ }}>
+      style={{ minHeight: `${newsSourceScores.length * 22 || 22}px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */ }}>
       Score graph goes here. Your browser may not support this functionality.
       </canvas>
   </>;
