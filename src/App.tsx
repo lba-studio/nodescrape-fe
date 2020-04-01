@@ -64,14 +64,14 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   }, [error]);
   React.useEffect(() => {
     if (newsSourceScores) {
-      let displayedScores = newsSourceScores;
+      let scoresToDisplay = newsSourceScores;
       if (filters.country) {
-        displayedScores = displayedScores.filter(score => score.country === filters.country);
+        scoresToDisplay = scoresToDisplay.filter(score => score.country === filters.country);
       }
       if (filters.name) {
-        displayedScores = displayedScores.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
+        scoresToDisplay = scoresToDisplay.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
       }
-      setDisplayedScores(displayedScores);
+      setDisplayedScores(scoresToDisplay);
     }
   }, [newsSourceScores, filters]);
   const { classes } = props;
