@@ -13,6 +13,7 @@ import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 import AnalyticService from './services/AnalyticService';
 import ScoreChart from './components/ScoreChart';
 import getLocation from './utils/getLocation';
+import FilterBox, { Filters } from './components/FilterBox';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -32,17 +33,18 @@ const styles = (theme: Theme) => createStyles({
 });
 
 
-
 const App: React.FC<WithStyles<typeof styles>> = (props) => {
   const [newsSourceScores, setNewsSourceScores] = React.useState<Array<NewsSourceScore> | null>(null);
   const [displayedScores, setDisplayedScores] = React.useState<Array<NewsSourceScore> | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<any | null>(null);
-  const [countryFilter, setCountryFilter] = React.useState<string>(getLocation() || '');
-  const countryOptions = React.useMemo<Array<string>>(() => Array.from(new Set(newsSourceScores?.map(score => score.country))), [newsSourceScores]);
+  const [filters, setFilters] = React.useState<Filters>({
+    country: '',
+    name: '',
+  }); 
   React.useEffect(() => {
+    AnalyticService.initialize();
     setIsLoading(true);
-    setError(null);
     NewsSourceScoreService.getNewsScores()
       .then(res => {
         if (res.length === 0) {
@@ -56,7 +58,6 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
       })
       .finally(() => setIsLoading(false));
   }, []);
-  React.useEffect(() => AnalyticService.initialize(), []);
   React.useEffect(() => {
     if (error) {
       console.error(error);
@@ -65,15 +66,15 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   React.useEffect(() => {
     if (newsSourceScores) {
       let displayedScores = newsSourceScores;
-      if (countryFilter) {
-        displayedScores = displayedScores.filter(score => !countryFilter || score.country === countryFilter)
+      if (filters.country) {
+        displayedScores = displayedScores.filter(score => score.country === filters.country);
+      }
+      if (filters.name) {
+        displayedScores = displayedScores.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
       }
       setDisplayedScores(displayedScores);
     }
-  }, [newsSourceScores, countryFilter]);
-  React.useEffect(() => {
-    // TODO: store country filter
-  }, [countryFilter]);
+  }, [newsSourceScores, filters]);
   const { classes } = props;
   return (
     <MuiThemeProvider theme={appTheme}>
@@ -88,27 +89,9 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           {isLoading && <LinearProgress />}
           {error && <Typography color="error">An error has occurred. Please try again later.</Typography>}
         </PageSection>
-        {displayedScores && <>
+        {newsSourceScores && displayedScores && <>
           <PageSection>
-            <Typography variant="h2">Filters</Typography>
-            <form>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
-                <FormControl margin="normal" className={classes.filter}>
-                  <InputLabel shrink id="choose-country-filter-label" htmlFor="choose-country-filter">By Country</InputLabel>
-                  <Select
-                    labelId="choose-country-filter-label"
-                    id="choose-country-filter"
-                    value={countryFilter}
-                    onChange={(event) => setCountryFilter(event.target.value as string)}
-                    displayEmpty
-                  >
-                    <MenuItem value="" disabled>-</MenuItem>
-                    {countryOptions.map(countryOption => <MenuItem value={countryOption}>{countryOption}</MenuItem>)}
-                  </Select>
-                </FormControl>
-                <Button color="primary" variant="contained" className="">Clear Filter</Button>
-              </Box>
-            </form>
+            <FilterBox newsSourceScores={newsSourceScores} onFilterChange={(newFilters) => setFilters(newFilters)} />
           </PageSection>
           <Divider />
           <PageSection>

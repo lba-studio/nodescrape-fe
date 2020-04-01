@@ -9,16 +9,13 @@ interface AverageNewsScoreCardProp {
 
 const AverageNewsScoreCard: React.FC<AverageNewsScoreCardProp> = (props) => {
   const { newsSourceScores } = props;
-  let average: number;
+  let average: number | undefined;
   let firstElement = newsSourceScores[0];
   if (firstElement) {
     average = newsSourceScores.reduce((acc, curr) => (acc + curr.score) / 2, firstElement.score);
-  } else {
-    return <Typography>Cannot get average score if there are no scores to begin with. Please try again later.</Typography>;
   }
   return (
     <BasicDataCard label="Average news score:" data={average}/>
-    || <></>
   );
 }
 
