@@ -2,7 +2,6 @@ import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardCont
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import computeColorHex from "../utils/computeColorHex";
-import dayjs from 'dayjs';
 import getTimePassedString from "../utils/getTimePassedString";
 
 interface NewsScoreCardProps {
