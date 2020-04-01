@@ -8,4 +8,8 @@ function getLocation(): string | null {
   }
 }
 
-export default getLocation;
+function setLocation(country: string) {
+  localStorage.setItem(LOCATION_LOCAL_STORAGE_KEY, country);
+}
+
+export default { getLocation, setLocation };

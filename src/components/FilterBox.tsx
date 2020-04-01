@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, FormControl, InputLabel, Select, MenuItem, Button, makeStyles, TextField } from '@material-ui/core';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import getLocation from '../utils/getLocation';
+import countryUtil from '../utils/countryUtil';
 
 interface FilterBoxProps {
   onFilterChange: (filter: Filters) => void;
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const initialState: Filters = {
-  country: getLocation() || '',
+  country: countryUtil.getLocation() || '',
   name: '',
 };
 
@@ -41,6 +41,7 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
   React.useEffect(() => {
     onFilterChange(filters);
     // (async () => onFilterChange(filters))();
+    countryUtil.setLocation(filters.country);
   }, [filters, onFilterChange]);
   return (
     <>
