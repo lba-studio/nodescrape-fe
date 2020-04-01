@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box, LinearProgress, Divider, Select, InputLabel, MenuItem, FormControl, Button } from '@material-ui/core';
+import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box, LinearProgress, Divider } from '@material-ui/core';
 import { appTheme } from './styles';
 import NewsSourceScoreService, { NewsSourceScore } from './services/NewsSourceScoreService';
 import NewsScoreCard from './components/NewsScoreCard';
@@ -12,7 +12,6 @@ import MedianNewsScoreCard from './components/MedianNewsScoreCard';
 import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 import AnalyticService from './services/AnalyticService';
 import ScoreChart from './components/ScoreChart';
-import getLocation from './utils/getLocation';
 import FilterBox, { Filters } from './components/FilterBox';
 
 const styles = (theme: Theme) => createStyles({

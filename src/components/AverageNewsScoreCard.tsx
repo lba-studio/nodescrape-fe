@@ -1,6 +1,5 @@
 import React from 'react';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import { Typography } from '@material-ui/core';
 import BasicDataCard from './BasicDataCard';
 
 interface AverageNewsScoreCardProp {
