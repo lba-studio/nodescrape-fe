@@ -16,6 +16,7 @@
     "@types/react-dom": "^16.9.5",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
+    "dayjs": "^1.8.23",
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

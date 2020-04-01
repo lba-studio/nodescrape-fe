@@ -4,7 +4,7 @@ import computeColorHex from "../utils/computeColorHex";
 
 interface BasicDataCardProp {
   label: string;
-  data: number;
+  data?: number;
   extraDataLabel?: string;
 }
 
@@ -28,8 +28,8 @@ const BasicDataCard: React.FC<BasicDataCardProp & WithStyles<typeof styles>> = (
         <div className={classes.label}>
           {label}
         </div>
-        <div className={classes.score} style={{ backgroundColor: computeColorHex(data) }}>
-          {data.toFixed(4)}{extraDataLabel && ` (${extraDataLabel})`}
+        <div className={classes.score} style={{ backgroundColor: computeColorHex(data || 0) }}>
+          {data ? `${data.toFixed(4)}${extraDataLabel ? ` (${extraDataLabel})` : ''}` : 'N/A'}
         </div>
       </Box>
     </Card>

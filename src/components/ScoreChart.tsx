@@ -3,7 +3,8 @@ import Chart from 'chart.js';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
 import _ from 'lodash';
 import computeColorHex from '../utils/computeColorHex';
-import { useMediaQuery, useTheme } from '@material-ui/core';
+import useIsMobile from '../utils/useIsMobile';
+import { Typography } from '@material-ui/core';
 
 interface ScoreChartProps {
   newsSourceScores: Array<NewsSourceScore>;
@@ -11,10 +12,9 @@ interface ScoreChartProps {
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
-  const chartRef = React.useRef<Chart| undefined>(undefined);
+  const chartRef = React.useRef<Chart | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
   React.useEffect(() => {
     console.debug('isMobile:', isMobile);
     const canvasContext: CanvasRenderingContext2D = _.invoke(canvasRef, 'current.getContext', '2d');
@@ -27,7 +27,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
         data: {
           labels: newsSourceScores.map(score => score.name),
           datasets: [{
-            label: '',
+            label: 'Average sentiment score',
             data: newsSourceScores.map(score => score.score),
             backgroundColor: (ctx) => {
               let data = _.get(ctx, `dataset.data[${ctx.dataIndex}]`, 0);
@@ -40,14 +40,14 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           responsive: true,
           maintainAspectRatio: false,
           legend: {
-            display: false,
+            // display: false,
           },
           scales: {
             yAxes: [{
               ticks: {
                 autoSkip: false,
               },
-              display: !isMobile,
+              // display: !isMobile,
             }],
             xAxes: [{
               ticks: {
@@ -58,18 +58,22 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           }
         },
       });
-      console.debug('Rendering chart.');
+      console.debug('Rendering chart.', newsSourceScores);
     }
   }, [newsSourceScores, isMobile]);
-
+  console.debug('Rerendering chart!');
   return <>
-    <canvas
-      aria-label="graph for scores"
-      role="img"
-      ref={canvasRef}
-      style={{ minHeight: `${newsSourceScores.length * 22 || 0}px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */ }}>
-      Score graph goes here. Your browser may not support this functionality.
-      </canvas>
+    <Typography>{isMobile ? 'Click on' : 'Hover over'} the bars for more information!</Typography>
+    <div style={{ minHeight: `${newsSourceScores.length * 44 || 44}px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */ }}>
+      <canvas
+        aria-label="graph for scores"
+        role="img"
+        ref={canvasRef}
+      // height={`${newsSourceScores.length * 22 || 22}px`}
+      >
+        Score graph goes here. Your browser may not support this functionality.
+    </canvas>
+    </div>
   </>;
 }
 

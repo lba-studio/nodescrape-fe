@@ -2,6 +2,7 @@ import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardCont
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import computeColorHex from "../utils/computeColorHex";
+import getTimePassedString from "../utils/getTimePassedString";
 
 interface NewsScoreCardProps {
   newsSourceScore: NewsSourceScore;
@@ -42,7 +43,7 @@ const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = 
             Retrieved from: {newsSourceScore.retrievedFrom || 'N/A'}
           </Typography>
           <Typography variant="subtitle2">
-            Last updated: {new Date(newsSourceScore.lastUpdatedMs).toISOString()}
+            Last updated: {getTimePassedString(new Date(newsSourceScore.lastUpdatedMs))}
           </Typography>
         </CardContent>
       </Card>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box } from '@material-ui/core';
+import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box, LinearProgress, Divider } from '@material-ui/core';
 import { appTheme } from './styles';
 import NewsSourceScoreService, { NewsSourceScore } from './services/NewsSourceScoreService';
 import NewsScoreCard from './components/NewsScoreCard';
@@ -12,6 +12,7 @@ import MedianNewsScoreCard from './components/MedianNewsScoreCard';
 import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 import AnalyticService from './services/AnalyticService';
 import ScoreChart from './components/ScoreChart';
+import FilterBox, { Filters } from './components/FilterBox';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -24,16 +25,24 @@ const styles = (theme: Theme) => createStyles({
   logo: {
     maxWidth: '128px',
     maxHeight: '128px',
-  }
+  },
+  filter: {
+    flexBasis: '128px',
+  },
 });
 
 
-
 const App: React.FC<WithStyles<typeof styles>> = (props) => {
-  const [newsSourceScores, setNewsSourceScores] = React.useState<Array<NewsSourceScore>>([]);
+  const [newsSourceScores, setNewsSourceScores] = React.useState<Array<NewsSourceScore> | null>(null);
+  const [displayedScores, setDisplayedScores] = React.useState<Array<NewsSourceScore> | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState<any | undefined>(undefined);
+  const [error, setError] = React.useState<any | null>(null);
+  const [filters, setFilters] = React.useState<Filters>({
+    country: '',
+    name: '',
+  }); 
   React.useEffect(() => {
+    AnalyticService.initialize();
     setIsLoading(true);
     NewsSourceScoreService.getNewsScores()
       .then(res => {
@@ -48,8 +57,23 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
       })
       .finally(() => setIsLoading(false));
   }, []);
-  React.useEffect(() => AnalyticService.initialize(), []);
-  React.useEffect(() => error && console.error(error), [error]);
+  React.useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
+  React.useEffect(() => {
+    if (newsSourceScores) {
+      let scoresToDisplay = newsSourceScores;
+      if (filters.country) {
+        scoresToDisplay = scoresToDisplay.filter(score => score.country === filters.country);
+      }
+      if (filters.name) {
+        scoresToDisplay = scoresToDisplay.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
+      }
+      setDisplayedScores(scoresToDisplay);
+    }
+  }, [newsSourceScores, filters]);
   const { classes } = props;
   return (
     <MuiThemeProvider theme={appTheme}>
@@ -61,26 +85,30 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           <Explanation />
         </PageSection>
         <PageSection>
-          {isLoading && <Typography>Loading data...</Typography>}
+          {isLoading && <LinearProgress />}
           {error && <Typography color="error">An error has occurred. Please try again later.</Typography>}
         </PageSection>
-        {!isLoading && !error && <>
+        {newsSourceScores && displayedScores && <>
           <PageSection>
-            <ScoreChart newsSourceScores={newsSourceScores} />
+            <FilterBox newsSourceScores={newsSourceScores} onFilterChange={(newFilters) => setFilters(newFilters)} />
+          </PageSection>
+          <Divider />
+          <PageSection>
+            <ScoreChart newsSourceScores={displayedScores} />
           </PageSection>
           <PageSection>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
               <div className={classes.dataCard}>
-                <AverageNewsScoreCard newsSourceScores={newsSourceScores} />
+                <AverageNewsScoreCard newsSourceScores={displayedScores} />
               </div>
               <div className={classes.dataCard}>
-                <MedianNewsScoreCard newsSourceScores={newsSourceScores} />
+                <MedianNewsScoreCard newsSourceScores={displayedScores} />
               </div>
             </Box>
           </PageSection>
           <PageSection>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-              {newsSourceScores
+              {displayedScores
                 .map((newsSourceScore, index) =>
                   <NewsScoreCard key={newsSourceScore.id} newsSourceScore={newsSourceScore} position={index + 1} />)}
             </Box>
