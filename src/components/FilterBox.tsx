@@ -29,14 +29,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const initialState: Filters = {
-  country: countryUtil.getLocation() || '',
+  country: '',
   name: '',
 };
 
 const FilterBox: React.FC<FilterBoxProps> = (props) => {
   const { newsSourceScores, onFilterChange } = props;
   const classes = useStyles();
-  const [filters, setFilters] = React.useState<Filters>(initialState);
+  const [filters, setFilters] = React.useState<Filters>({
+    ...initialState,
+    country: countryUtil.getLocation() || initialState.country,
+  });
   const countryOptions = React.useMemo<Array<string>>(() => Array.from(new Set(newsSourceScores.map(score => score.country))), [newsSourceScores]);
   React.useEffect(() => {
     onFilterChange(filters);
@@ -74,9 +77,8 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
               id="choose-country-filter"
               value={filters.country}
               onChange={(event) => setFilters({ ...filters, country: event.target.value as string })}
-              displayEmpty
             >
-              {/* <MenuItem value="" disabled>-</MenuItem> */}
+              <MenuItem value=""><em>None</em></MenuItem>
               {countryOptions.map(countryOption => <MenuItem value={countryOption}>{countryOption}</MenuItem>)}
             </Select>
           </FormControl>
