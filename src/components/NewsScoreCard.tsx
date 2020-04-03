@@ -17,6 +17,9 @@ const styles = (theme: Theme) => createStyles({
   },
   cardHeader: {
     wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    msWordBreak: 'break-all',
+    display: 'flex',
   }
 });
 
@@ -24,7 +27,9 @@ const styles = (theme: Theme) => createStyles({
 const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = (props) => {
   const { position, classes, newsSourceScore } = props;
   return (
-    <div>
+    <div
+      style={{ maxWidth: '100%' }}
+    >
       <Card className={classes.root}>
         <CardHeader
           avatar={<Avatar style={{ backgroundColor: computeColorHex(newsSourceScore.score) }}>
@@ -40,7 +45,7 @@ const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = 
           </Typography>
           <Divider />
           <Typography variant="subtitle2">
-            Retrieved from: {newsSourceScore.retrievedFrom || 'N/A'}
+            Retrieved from: {newsSourceScore.retrievedFrom || 'Scraper'}
           </Typography>
           <Typography variant="subtitle2">
             Last updated: {getTimePassedString(new Date(newsSourceScore.lastUpdatedMs))}

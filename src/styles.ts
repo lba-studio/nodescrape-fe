@@ -16,4 +16,11 @@ export const appTheme = createMuiTheme({
       fontSize: '1.5rem',
     },
   },
+  overrides: {
+    MuiCardHeader: {
+      content: {
+        minWidth: 0, // for enforcing flex and forcing wrapping
+      }
+    }
+  }
 });

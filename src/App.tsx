@@ -17,7 +17,7 @@ import FilterBox, { Filters } from './components/FilterBox';
 const styles = (theme: Theme) => createStyles({
   root: {
     textAlign: 'center',
-    margin: theme.spacing(4),
+    margin: theme.spacing(2),
   },
   dataCard: {
     margin: theme.spacing(2),
@@ -40,7 +40,8 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   const [filters, setFilters] = React.useState<Filters>({
     country: '',
     name: '',
-  }); 
+  });
+  const timeoutToken = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   React.useEffect(() => {
     AnalyticService.initialize();
     setIsLoading(true);
@@ -63,16 +64,21 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
     }
   }, [error]);
   React.useEffect(() => {
-    if (newsSourceScores) {
-      let scoresToDisplay = newsSourceScores;
-      if (filters.country) {
-        scoresToDisplay = scoresToDisplay.filter(score => score.country === filters.country);
-      }
-      if (filters.name) {
-        scoresToDisplay = scoresToDisplay.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
-      }
-      setDisplayedScores(scoresToDisplay);
+    if (timeoutToken.current) {
+      clearTimeout(timeoutToken.current);
     }
+    timeoutToken.current = setTimeout(() => {
+      if (newsSourceScores) {
+        let scoresToDisplay = newsSourceScores;
+        if (filters.country) {
+          scoresToDisplay = scoresToDisplay.filter(score => score.country === filters.country);
+        }
+        if (filters.name) {
+          scoresToDisplay = scoresToDisplay.filter(score => score.name.toLowerCase().includes(filters.name.toLowerCase()));
+        }
+        setDisplayedScores(scoresToDisplay);
+      }
+    }, 200);
   }, [newsSourceScores, filters]);
   const { classes } = props;
   return (
@@ -92,7 +98,6 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           <PageSection>
             <FilterBox newsSourceScores={newsSourceScores} onFilterChange={(newFilters) => setFilters(newFilters)} />
           </PageSection>
-          <Divider />
           <PageSection>
             <ScoreChart newsSourceScores={displayedScores} />
           </PageSection>
