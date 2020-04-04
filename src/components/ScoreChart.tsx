@@ -28,7 +28,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           labels: newsSourceScores.map(score => score.name),
           datasets: [{
             label: 'Average sentiment score',
-            data: newsSourceScores.map(score => score.score),
+            data: newsSourceScores.map(score => Number(score.score.toFixed(3))),
             backgroundColor: (ctx) => {
               let data = _.get(ctx, `dataset.data[${ctx.dataIndex}]`, 0);
               return computeColorHex(data);
@@ -40,7 +40,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           responsive: true,
           maintainAspectRatio: false,
           legend: {
-            // display: false,
+            display: false,
           },
           scales: {
             yAxes: [{
