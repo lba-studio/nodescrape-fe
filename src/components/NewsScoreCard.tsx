@@ -1,4 +1,4 @@
-import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider, IconButton, Dialog, DialogContent, Box, DialogTitle, DialogActions, Button, CardActionArea, Link } from "@material-ui/core";
+import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider, IconButton, Dialog, DialogContent, Box, DialogTitle, DialogActions, Button, CardActionArea, Link, CardActions } from "@material-ui/core";
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import computeColorHex from "../utils/computeColorHex";
@@ -29,7 +29,10 @@ const styles = (theme: Theme) => createStyles({
   },
   dialogTitleName: {
     margin: 'auto',
-  }
+  },
+  infoButton: {
+    marginLeft: 'auto',
+  },
 });
 
 
@@ -49,18 +52,20 @@ const NewsScoreCard: React.FC<NewsScoreCardProps & WithStyles<typeof styles>> = 
               </Avatar>}
               className={classes.cardHeader}
               title={newsSourceScore.name}
-              action={
-                <IconButton aria-label="more info" onClick={() => setDialogOpen(true)}>
-                  <InfoIcon />
-                </IconButton>
-              }
             />
             <CardContent>
               <Typography>
-                News score: {newsSourceScore.score.toFixed(3)}
+                Score: {newsSourceScore.score.toFixed(3)}
               </Typography>
             </CardContent>
           </CardActionArea>
+          <Divider />
+          <CardActions disableSpacing>
+            {/* <Button className={classes.infoButton} onClick={() => setDialogOpen(true)}>More</Button> */}
+            <IconButton className={classes.infoButton} disableRipple aria-label="more info" onClick={() => setDialogOpen(true)}>
+              <InfoIcon />
+            </IconButton>
+          </CardActions>
         </Card>
       </div>
       <Dialog onClose={() => setDialogOpen(false)} open={dialogOpen}>

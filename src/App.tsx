@@ -13,6 +13,7 @@ import MagGlassIcon from './assets/magnifying_glass_icon.svg';
 import AnalyticService from './services/AnalyticService';
 import ScoreChart from './components/ScoreChart';
 import FilterBox, { Filters } from './components/FilterBox';
+import Header from './components/Header';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -84,6 +85,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
   return (
     <MuiThemeProvider theme={appTheme}>
       <div className={classes.root}>
+        <Header />
         <PageSection>
           <img className={classes.logo} src={MagGlassIcon} alt="Logo" aria-label="logo" />
           <Typography variant="h1">News Neutrality Watcher</Typography>
@@ -111,6 +113,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
               </div>
             </Box>
           </PageSection>
+          <Typography variant="h2">Click on a card to view web page</Typography>
           <PageSection>
             <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
               {displayedScores
