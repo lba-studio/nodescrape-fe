@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box, LinearProgress, Divider } from '@material-ui/core';
+import { Typography, MuiThemeProvider, Theme, createStyles, withStyles, WithStyles, Box, LinearProgress } from '@material-ui/core';
 import { appTheme } from './styles';
 import NewsSourceScoreService, { NewsSourceScore } from './services/NewsSourceScoreService';
 import NewsScoreCard from './components/NewsScoreCard';
