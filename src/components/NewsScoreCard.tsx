@@ -1,4 +1,4 @@
-import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider, IconButton, Dialog, DialogContent, Box, DialogTitle, DialogActions, Button, CardActionArea, Link, CardActions } from "@material-ui/core";
+import { Card, CardHeader, Theme, WithStyles, withStyles, createStyles, CardContent, Typography, Avatar, Divider, IconButton, Dialog, DialogContent, Box, DialogTitle, DialogActions, Button, CardActionArea, CardActions } from "@material-ui/core";
 import React from 'react';
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import computeColorHex from "../utils/computeColorHex";
