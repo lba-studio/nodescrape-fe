@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { Router, Route, Switch } from 'react-router-dom';
 import Routing from './utils/Routing';
-import HomePage from './pages/HomePage';
+import NewsSourceScoresPage from './pages/NewsSourceScoresPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const styles = (theme: Theme) => createStyles({
@@ -28,8 +28,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
         <div className={classes.contentRoot}>
           <Router history={Routing.history}>
             <Switch>
-              <Route exact path={['/']} component={HomePage} />
-              {/* <Route exact path={['/about']} component={AboutPage} /> */}
+              <Route exact path={['/']} component={NewsSourceScoresPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Router>

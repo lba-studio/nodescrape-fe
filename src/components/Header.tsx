@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import Routing from '../utils/Routing';
+import { siteTitle } from '../config/constants';
 
 const useStyles = makeStyles(theme => ({
   siteTitle: {
@@ -17,7 +18,7 @@ const Header: React.FC = () => {
   return <AppBar position="sticky">
     <Toolbar>
       <Typography className={classes.siteTitle}>
-        NewsWatch
+        {siteTitle}
       </Typography>
       <Button color="inherit" onClick={() => Routing.goTo('/')}>Home</Button>
       {/* <Button color="inherit" onClick={() => Routing.goTo('/about')}>About</Button> */}

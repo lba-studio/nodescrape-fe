@@ -5,10 +5,20 @@ import _ from 'lodash';
 import computeColorHex from '../utils/computeColorHex';
 import useIsMobile from '../utils/useIsMobile';
 import { Typography } from '@material-ui/core';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Align, Anchor } from 'chartjs-plugin-datalabels/types/options';
 
 interface ScoreChartProps {
   newsSourceScores: Array<NewsSourceScore>;
 };
+
+function getDataFromCtx(ctx: Parameters<Chart.Scriptable<any>>[0]): number {
+  return _.get(ctx, `dataset.data[${ctx.dataIndex}]`, 0);
+}
+
+function getAlignAnchor(ctx: Parameters<Chart.Scriptable<Align | Anchor>>[0]) {
+  return getDataFromCtx(ctx) > 0 ? 'start' : 'end'
+}
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
@@ -23,20 +33,31 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
         chartRef.current.destroy();
       }
       chartRef.current = new Chart(canvasContext, {
+        plugins: [
+          ChartDataLabels,
+        ],
         type: 'horizontalBar',
         data: {
           labels: newsSourceScores.map(score => score.name),
           datasets: [{
             label: 'Average sentiment score',
             data: newsSourceScores.map(score => Number(score.score.toFixed(3))),
-            backgroundColor: (ctx) => {
-              let data = _.get(ctx, `dataset.data[${ctx.dataIndex}]`, 0);
-              return computeColorHex(data);
-            },
-            // barThickness: 22,
+            backgroundColor: (ctx) => computeColorHex(getDataFromCtx(ctx)),
+            datalabels: {
+              formatter: (value, context) => {
+                return `${newsSourceScores[context.dataIndex].name} ${value}`;
+              },
+              color: 'black',
+              // backgroundColor: 'white',
+              align: getAlignAnchor,
+              anchor: getAlignAnchor,
+            }
           }],
         },
         options: {
+          layout: {
+            // padding: 0,
+          },
           responsive: true,
           maintainAspectRatio: false,
           legend: {
@@ -47,12 +68,14 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
               ticks: {
                 autoSkip: false,
               },
-              // display: !isMobile,
+              display: false,
             }],
             xAxes: [{
               ticks: {
                 // autoSkip: false,
                 beginAtZero: true,
+                suggestedMin: -0.2,
+                suggestedMax: 0.2,
               }
             }]
           }
