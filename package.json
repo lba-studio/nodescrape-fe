@@ -16,11 +16,13 @@
     "@types/react-dom": "^16.9.5",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-datalabels": "^0.7.0",
     "dayjs": "^1.8.23",
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-ga": "^2.7.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "typescript": "^3.8.3"
   },
@@ -28,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .tsx,.ts,.jsx,.js src/",
+    "lint:fix": "eslint --ext .tsx,.ts,.jsx,.js src/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.3"
   }
 }
