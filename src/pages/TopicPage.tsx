@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, makeStyles, Grid, Box, Typography, Button, LinearProgress } from '@material-ui/core';
+import { TextField, makeStyles, Typography, Button, LinearProgress } from '@material-ui/core';
 import PageSection from '../components/PageSection';
 import TopicService, { GetTopicResult } from '../services/TopicService';
 import parseError from '../utils/parseError';
