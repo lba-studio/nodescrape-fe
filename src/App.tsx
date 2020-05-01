@@ -10,13 +10,14 @@ import NewsSourceScoresPage from './pages/NewsSourceScoresPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ContributePage from './pages/ContributePage';
 import FeedbackPage from './pages/FeedbackPage';
+import TopicPage from './pages/TopicPage';
 
 const styles = (theme: Theme) => createStyles({
   root: {
     textAlign: 'center',
   },
   contentRoot: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(4),
   }
 });
 
@@ -34,6 +35,7 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
             <Switch>
               <Route exact path={['/']} component={NewsSourceScoresPage} />
               <Route exact path={['/about']} component={ContributePage} />
+              <Route exact path={['/topics']} component={TopicPage} />
               {/* <Route exact path={['/feedback']} component={FeedbackPage}/> */}
               <Route component={NotFoundPage} />
             </Switch>
