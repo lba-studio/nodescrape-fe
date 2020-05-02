@@ -2,7 +2,7 @@ import { createBrowserHistory, Location } from 'history';
 import ReactGA from 'react-ga';
 
 const history = createBrowserHistory();
-ReactGA.initialize('UA-145929509-1');
+ReactGA.initialize('UA-145929509-2');
 track(history.location);
 
 history.listen((location, action) => {

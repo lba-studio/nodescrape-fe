@@ -7,7 +7,6 @@ import AverageNewsScoreCard from "../components/AverageNewsScoreCard";
 import MedianNewsScoreCard from "../components/MedianNewsScoreCard";
 import NewsScoreCard from "../components/NewsScoreCard";
 import React from 'react';
-import AnalyticService from "../services/AnalyticService";
 import NewsSourceScoreService, { NewsSourceScore } from "../services/NewsSourceScoreService";
 import MagGlassIcon from '../assets/magnifying_glass_icon.svg';
 
@@ -36,7 +35,6 @@ const HomePage: React.FC = (props) => {
   const timeoutToken = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const classes = useStyles();
   React.useEffect(() => {
-    AnalyticService.initialize();
     setIsLoading(true);
     NewsSourceScoreService.getNewsScores()
       .then(res => {
