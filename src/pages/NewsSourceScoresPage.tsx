@@ -1,5 +1,5 @@
 import PageSection from "../components/PageSection";
-import { Typography, LinearProgress, Box, makeStyles } from "@material-ui/core";
+import { Typography, LinearProgress, Box, makeStyles, Table, TableContainer, TableBody, TableHead, TableRow, TableCell } from "@material-ui/core";
 import Explanation from "../components/Explanation";
 import FilterBox, { Filters } from "../components/FilterBox";
 import ScoreChart from "../components/ScoreChart";
@@ -9,6 +9,7 @@ import NewsScoreCard from "../components/NewsScoreCard";
 import React from 'react';
 import NewsSourceScoreService, { NewsSourceScore } from "../services/NewsSourceScoreService";
 import MagGlassIcon from '../assets/magnifying_glass_icon.svg';
+import NewsSourceScoreDisplay from "../components/NewsSourceScoreDisplay";
 
 const useStyles = makeStyles(theme => ({
   dataCard: {
@@ -102,11 +103,7 @@ const HomePage: React.FC = (props) => {
         </PageSection>
         <Typography variant="h2">Click on a card to view web page</Typography>
         <PageSection>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            {displayedScores
-              .map((newsSourceScore, index) =>
-                <NewsScoreCard key={newsSourceScore.id} newsSourceScore={newsSourceScore} position={index + 1} />)}
-          </Box>
+          <NewsSourceScoreDisplay newsSourceScores={displayedScores} />
         </PageSection>
       </>
     }
