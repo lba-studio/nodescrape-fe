@@ -33,10 +33,9 @@ const App: React.FC<WithStyles<typeof styles>> = (props) => {
           <Divider />
           <Router history={Routing.history}>
             <Switch>
-              <Route exact path={['/']} component={NewsSourceScoresPage} />
+              <Route exact path={['/sources']} component={NewsSourceScoresPage} />
               <Route exact path={['/about']} component={ContributePage} />
-              <Route exact path={['/topics']} component={TopicPage} />
-              {/* <Route exact path={['/feedback']} component={FeedbackPage}/> */}
+              <Route exact path={['/', '/topics']} component={TopicPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Router>

@@ -5,10 +5,10 @@ import FilterBox, { Filters } from "../components/FilterBox";
 import ScoreChart from "../components/ScoreChart";
 import AverageNewsScoreCard from "../components/AverageNewsScoreCard";
 import MedianNewsScoreCard from "../components/MedianNewsScoreCard";
-import NewsScoreCard from "../components/NewsScoreCard";
 import React from 'react';
 import NewsSourceScoreService, { NewsSourceScore } from "../services/NewsSourceScoreService";
 import MagGlassIcon from '../assets/magnifying_glass_icon.svg';
+import NewsSourceScoreDisplay from "../components/NewsSourceScoreDisplay";
 
 const useStyles = makeStyles(theme => ({
   dataCard: {
@@ -38,9 +38,6 @@ const HomePage: React.FC = (props) => {
     setIsLoading(true);
     NewsSourceScoreService.getNewsScores()
       .then(res => {
-        if (res.length === 0) {
-          throw new Error('Unable to retrieve any score data. Please try again later.')
-        }
         setNewsSourceScores(res.sort((a, b) => b.score - a.score));
       })
       .catch(e => {
@@ -83,32 +80,41 @@ const HomePage: React.FC = (props) => {
       {error && <Typography color="error">An error has occurred. Please try again later.</Typography>}
     </PageSection>
     {
-      newsSourceScores && displayedScores && <>
-        <PageSection>
-          <FilterBox newsSourceScores={newsSourceScores} onFilterChange={(newFilters) => setFilters(newFilters)} />
-        </PageSection>
-        <PageSection>
-          <ScoreChart newsSourceScores={displayedScores} />
-        </PageSection>
-        <PageSection>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            <div className={classes.dataCard}>
-              <AverageNewsScoreCard newsSourceScores={displayedScores} />
-            </div>
-            <div className={classes.dataCard}>
-              <MedianNewsScoreCard newsSourceScores={displayedScores} />
-            </div>
-          </Box>
-        </PageSection>
-        <Typography variant="h2">Click on a card to view web page</Typography>
-        <PageSection>
-          <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
-            {displayedScores
-              .map((newsSourceScore, index) =>
-                <NewsScoreCard key={newsSourceScore.id} newsSourceScore={newsSourceScore} position={index + 1} />)}
-          </Box>
-        </PageSection>
-      </>
+      newsSourceScores && displayedScores && (newsSourceScores.length ?
+        <>
+          <PageSection>
+            <FilterBox
+              newsSourceScores={newsSourceScores}
+              onFilterChange={(newFilters) => setFilters(newFilters)}
+            />
+          </PageSection>
+          {Boolean(displayedScores.length) ?
+            <>
+              <PageSection>
+                <ScoreChart newsSourceScores={displayedScores} />
+              </PageSection>
+              <PageSection>
+                <Box display="flex" flexDirection="row" justifyContent="center" flexWrap="wrap">
+                  <div className={classes.dataCard}>
+                    <AverageNewsScoreCard newsSourceScores={displayedScores} />
+                  </div>
+                  <div className={classes.dataCard}>
+                    <MedianNewsScoreCard newsSourceScores={displayedScores} />
+                  </div>
+                </Box>
+              </PageSection>
+              <PageSection>
+                <NewsSourceScoreDisplay newsSourceScores={displayedScores} />
+              </PageSection>
+            </>
+            :
+            <Typography>
+              No matching news sources can be found.
+            </Typography>}
+        </>
+        :
+        <Typography variant="h3">We can't seem to find any data. Please come back again later!</Typography>
+      )
     }
   </>
 }
