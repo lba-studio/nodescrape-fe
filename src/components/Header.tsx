@@ -20,8 +20,8 @@ const Header: React.FC = () => {
       <Typography className={classes.siteTitle}>
         {siteTitle} (BETA)
       </Typography>
-      <Button color="inherit" onClick={() => Routing.goTo('/')}>Sources</Button>
       <Button color="inherit" onClick={() => Routing.goTo('/topics')}>Topics</Button>
+      <Button color="inherit" onClick={() => Routing.goTo('/sources')}>Sources</Button>
       <Button color="inherit" onClick={() => Routing.goTo('/about')}>About</Button>
     </Toolbar>
   </AppBar>;

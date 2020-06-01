@@ -21,6 +21,12 @@ export const appTheme = createMuiTheme({
       content: {
         minWidth: 0, // for enforcing flex and forcing wrapping
       }
+    },
+    MuiTableCell: {
+      head: {
+        fontWeight: 700,
+        color: "#666666",
+      },
     }
   }
 });

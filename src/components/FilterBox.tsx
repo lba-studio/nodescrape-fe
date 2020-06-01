@@ -79,7 +79,7 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
               onChange={(event) => setFilters({ ...filters, country: event.target.value as string })}
             >
               <MenuItem value=""><em>None</em></MenuItem>
-              {countryOptions.map(countryOption => <MenuItem value={countryOption}>{countryOption}</MenuItem>)}
+              {countryOptions.map(countryOption => <MenuItem key={countryOption} value={countryOption}>{countryOption}</MenuItem>)}
             </Select>
           </FormControl>
           {/* <div className={classes.item}>
