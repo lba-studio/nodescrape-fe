@@ -46,7 +46,6 @@ const TopicPage: React.FC = () => {
       .catch(e => setError(parseError(e)))
       .finally(() => setIsLoading(false));
   }
-  // React.useEffect(loadData, []);
   return <>
     <PageSection>
       <Typography variant="h1">Topic Sentiment Viewer</Typography>

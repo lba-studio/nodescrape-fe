@@ -5,7 +5,6 @@ import FilterBox, { Filters } from "../components/FilterBox";
 import ScoreChart from "../components/ScoreChart";
 import AverageNewsScoreCard from "../components/AverageNewsScoreCard";
 import MedianNewsScoreCard from "../components/MedianNewsScoreCard";
-import NewsScoreCard from "../components/NewsScoreCard";
 import React from 'react';
 import NewsSourceScoreService, { NewsSourceScore } from "../services/NewsSourceScoreService";
 import MagGlassIcon from '../assets/magnifying_glass_icon.svg';

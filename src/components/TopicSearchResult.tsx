@@ -1,7 +1,8 @@
 import React from 'react';
 import { GetTopicResult } from '../services/TopicService';
-import { Typography, Card, CardHeader, Grid, CardContent, makeStyles, CardMedia } from '@material-ui/core';
+import { Typography, Card, CardHeader, Grid, CardContent, makeStyles, CardMedia, Box, Tooltip, CardActionArea } from '@material-ui/core';
 import PageSection from './PageSection';
+import InfoIcon from '@material-ui/icons/Info';
 
 interface TopicSearchResultProps {
   getTopicResult: GetTopicResult;
@@ -18,7 +19,10 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: '128px',
-  }
+  },
+  infoIcon: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
@@ -34,7 +38,15 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
     <PageSection>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h3">Result</Typography>
+          <Tooltip
+            title="The average sentiment score of the articles of this topic."
+            arrow
+          >
+            <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+              <Typography variant="h3">Score Result</Typography>
+              <InfoIcon className={classes.infoIcon} />
+            </Box>
+          </Tooltip>
           <Typography variant="h2">{getTopicResult.score.toFixed(4)}</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -51,17 +63,24 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
             .slice(0, 4)
             .map(article => (
               <Grid item xs={12} sm={6} md={3} className={classes.newsArticleCardContainer}>
-                <Card className={classes.newsArticleCard}>
-                  <CardMedia
-                    className={classes.media}
-                    image={article.imageUrl}
-                    title={article.title}
-                  />
-                  <CardHeader title={article.title} />
-                  <CardContent>
-                    {article.content}
-                  </CardContent>
-                </Card>
+                <CardActionArea className={classes.newsArticleCard} onClick={() => window.open(article.url, '_blank')}>
+                  <Card className={classes.newsArticleCard}>
+                    <CardMedia
+                      className={classes.media}
+                      image={article.imageUrl}
+                      title={article.title}
+                    />
+                    <CardHeader
+                      title={article.title}
+                      subheader={article.sourceName}
+                    />
+                    <CardContent>
+                      <Typography>
+                        {article.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </CardActionArea>
               </Grid>
             ))}
         </Grid>
