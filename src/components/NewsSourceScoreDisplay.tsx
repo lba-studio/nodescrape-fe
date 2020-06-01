@@ -1,9 +1,8 @@
 import React from 'react';
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeStyles, useTheme, Tooltip, Dialog, DialogTitle, Box, Avatar, DialogContent, Typography, Divider, DialogActions, Button, Paper, Card } from '@material-ui/core';
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, makeStyles, useTheme, Tooltip, Dialog, DialogTitle, Box, Avatar, DialogContent, Typography, Divider, DialogActions, Button, Card } from '@material-ui/core';
 import { NewsSourceScore } from '../services/NewsSourceScoreService';
 import computeColorHex from '../utils/computeColorHex';
 import getTimePassedString from '../utils/getTimePassedString';
-import InfoIcon from '@material-ui/icons/Info';
 
 interface NewsSourceScoreDisplayProps {
   newsSourceScores: Array<NewsSourceScore>

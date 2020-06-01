@@ -1,5 +1,5 @@
 import PageSection from "../components/PageSection";
-import { Typography, LinearProgress, Box, makeStyles, Table, TableContainer, TableBody, TableHead, TableRow, TableCell } from "@material-ui/core";
+import { Typography, LinearProgress, Box, makeStyles } from "@material-ui/core";
 import Explanation from "../components/Explanation";
 import FilterBox, { Filters } from "../components/FilterBox";
 import ScoreChart from "../components/ScoreChart";
