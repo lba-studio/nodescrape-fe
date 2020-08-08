@@ -1,7 +1,17 @@
-import React from 'react';
-import { Typography, Box, FormControl, InputLabel, Select, MenuItem, Button, makeStyles, TextField } from '@material-ui/core';
-import { NewsSourceScore } from '../services/NewsSourceScoreService';
-import countryUtil from '../utils/countryUtil';
+import React from "react";
+import {
+  Typography,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+import { NewsSourceScore } from "../services/NewsSourceScoreService";
+import countryUtil from "../utils/countryUtil";
 
 interface FilterBoxProps {
   onFilterChange: (filter: Filters) => void;
@@ -13,24 +23,24 @@ export interface Filters {
   name: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   mediumFilter: {
-    flexBasis: '128px',
+    flexBasis: "128px",
   },
   textFilter: {
-    flexBasis: '256px',
+    flexBasis: "256px",
   },
   item: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    marginTop: "auto",
+    marginBottom: "auto",
   },
 }));
 
 const initialState: Filters = {
-  country: '',
-  name: '',
+  country: "",
+  name: "",
 };
 
 const FilterBox: React.FC<FilterBoxProps> = (props) => {
@@ -40,7 +50,10 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
     ...initialState,
     country: countryUtil.getLocation() || initialState.country,
   });
-  const countryOptions = React.useMemo<Array<string>>(() => Array.from(new Set(newsSourceScores.map(score => score.country))), [newsSourceScores]);
+  const countryOptions = React.useMemo<Array<string>>(
+    () => Array.from(new Set(newsSourceScores.map((score) => score.country))),
+    [newsSourceScores]
+  );
   React.useEffect(() => {
     onFilterChange(filters);
     // (async () => onFilterChange(filters))();
@@ -50,7 +63,12 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
     <>
       <Typography variant="h2">Filters</Typography>
       <form>
-        <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+        <Box
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="center"
+        >
           <TextField
             // required
             id="search-query"
@@ -58,13 +76,18 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
             margin="normal"
             name="searchQuery"
             value={filters.name}
-            onChange={(event) => setFilters({ ...filters, name: event.target.value as string })}
+            onChange={(event) =>
+              setFilters({ ...filters, name: event.target.value as string })
+            }
             variant="outlined"
             className={classes.textFilter}
-          // InputLabelProps={{ shrink: true }}
-          // fullWidth
+            // InputLabelProps={{ shrink: true }}
+            // fullWidth
           />
-          <FormControl margin="normal" className={classes.mediumFilter + ' ' + classes.item}>
+          <FormControl
+            margin="normal"
+            className={classes.mediumFilter + " " + classes.item}
+          >
             <InputLabel
               // shrink
               id="choose-country-filter-label"
@@ -76,22 +99,39 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
               labelId="choose-country-filter-label"
               id="choose-country-filter"
               value={filters.country}
-              onChange={(event) => setFilters({ ...filters, country: event.target.value as string })}
+              onChange={(event) =>
+                setFilters({
+                  ...filters,
+                  country: event.target.value as string,
+                })
+              }
             >
-              <MenuItem value=""><em>None</em></MenuItem>
-              {countryOptions.map(countryOption => <MenuItem key={countryOption} value={countryOption}>{countryOption}</MenuItem>)}
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {countryOptions.map((countryOption) => (
+                <MenuItem key={countryOption} value={countryOption}>
+                  {countryOption}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           {/* <div className={classes.item}>
             <Button color="primary" variant="contained" className="" onClick={() => onFilterChange(filters)}>Submit</Button>
           </div> */}
           <div className={classes.item}>
-            <Button variant="contained" className="" onClick={() => setFilters(initialState)}>Clear</Button>
+            <Button
+              variant="contained"
+              className=""
+              onClick={() => setFilters(initialState)}
+            >
+              Clear
+            </Button>
           </div>
         </Box>
       </form>
     </>
   );
-}
+};
 
 export default FilterBox;

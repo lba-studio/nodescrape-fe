@@ -1,8 +1,8 @@
-import { createBrowserHistory, Location } from 'history';
-import ReactGA from 'react-ga';
+import { createBrowserHistory, Location } from "history";
+import ReactGA from "react-ga";
 
 const history = createBrowserHistory();
-ReactGA.initialize('UA-145929509-2');
+ReactGA.initialize("UA-145929509-2");
 track(history.location);
 
 history.listen((location, action) => {
@@ -10,14 +10,14 @@ history.listen((location, action) => {
 });
 
 function shouldTrack(): boolean {
-  return window.location.hostname !== 'localhost';
+  return window.location.hostname !== "localhost";
 }
 
 function track(location: Location) {
   if (shouldTrack()) {
     ReactGA.pageview(location.pathname);
   } else {
-    console.debug('Skipping tracking using GA.');
+    console.debug("Skipping tracking using GA.");
     return;
   }
 }

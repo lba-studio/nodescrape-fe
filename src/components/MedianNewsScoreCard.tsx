@@ -11,13 +11,23 @@ const MedianNewsScoreCard: React.FC<MedianNewsScoreCardProp> = (props) => {
   let data;
   let extraDataLabel;
   if (!newsSourceScores.length) {
-    console.error('Cannot get median: An empty array (or undefined) is passed in.', newsSourceScores);
+    console.error(
+      "Cannot get median: An empty array (or undefined) is passed in.",
+      newsSourceScores
+    );
   } else {
-    let medianNewsSource = newsSourceScores[Math.floor(newsSourceScores.length / 2)];
+    let medianNewsSource =
+      newsSourceScores[Math.floor(newsSourceScores.length / 2)];
     data = medianNewsSource.score;
-    extraDataLabel = medianNewsSource.name
+    extraDataLabel = medianNewsSource.name;
   }
-  return <BasicDataCard label="Median news score:" data={data} extraDataLabel={extraDataLabel} />
-}
+  return (
+    <BasicDataCard
+      label="Median news score:"
+      data={data}
+      extraDataLabel={extraDataLabel}
+    />
+  );
+};
 
 export default MedianNewsScoreCard;
