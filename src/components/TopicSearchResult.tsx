@@ -39,11 +39,11 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Tooltip
-            title="The average sentiment score of the articles of this topic."
+            title="The average sentiment score of the articles of this topic, with scores closer to 1 indicating that the article is positive, and scores closer to -1 indicating that the article is negative."
             arrow
           >
             <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-              <Typography variant="h3">Score Result</Typography>
+              <Typography variant="h3">Sentiment Score</Typography>
               <InfoIcon className={classes.infoIcon} />
             </Box>
           </Tooltip>
