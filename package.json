@@ -31,11 +31,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .tsx,.ts,.jsx,.js src/",
-    "lint:fix": "eslint --ext .tsx,.ts,.jsx,.js src/"
+    "lint": "eslint --ext .tsx,.ts,.jsx,.js src/ && prettier --check src/",
+    "lint:fix": "eslint --ext .tsx,.ts,.jsx,.js src/ && prettier --write src/"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "rules": {
+      "prefer-const": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -51,6 +57,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
+    "eslint-config-prettier": "^6.11.0",
     "prettier": "2.0.5"
   }
 }

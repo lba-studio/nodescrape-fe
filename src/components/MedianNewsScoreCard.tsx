@@ -1,6 +1,6 @@
+import BasicDataCard from "./BasicDataCard";
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import React from "react";
-import BasicDataCard from "./BasicDataCard";
 
 interface MedianNewsScoreCardProp {
   newsSourceScores: Array<NewsSourceScore>;
@@ -16,7 +16,7 @@ const MedianNewsScoreCard: React.FC<MedianNewsScoreCardProp> = (props) => {
       newsSourceScores
     );
   } else {
-    let medianNewsSource =
+    const medianNewsSource =
       newsSourceScores[Math.floor(newsSourceScores.length / 2)];
     data = medianNewsSource.score;
     extraDataLabel = medianNewsSource.name;
