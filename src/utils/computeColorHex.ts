@@ -10,9 +10,8 @@ export default function (ratio: number): string {
 }
 
 function computeColor(percent: number) {
-  let r,
-    g,
-    b = 0;
+  let r, g;
+  const b = 0;
   if (percent < 50) {
     r = 255;
     g = Math.round(5.1 * percent);
