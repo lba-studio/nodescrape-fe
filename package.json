@@ -3,39 +3,45 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.9.14",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/chart.js": "^2.9.21",
-    "@types/jest": "^24.9.1",
-    "@types/lodash": "^4.14.152",
-    "@types/node": "^12.12.41",
-    "@types/react": "^16.9.35",
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.8",
+    "@testing-library/user-event": "^12.1.0",
+    "@types/chart.js": "^2.9.23",
+    "@types/jest": "^26.0.9",
+    "@types/lodash": "^4.14.159",
+    "@types/node": "^14.0.27",
+    "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
-    "dayjs": "^1.8.27",
-    "lodash": "^4.17.15",
+    "dayjs": "^1.8.32",
+    "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-ga": "^2.7.0",
+    "react-ga": "^3.1.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.3.1",
-    "typescript": "^3.9.3"
+    "react-scripts": "^3.4.1",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .tsx,.ts,.jsx,.js src/",
-    "lint:fix": "eslint --ext .tsx,.ts,.jsx,.js src/"
+    "lint": "eslint --ext .tsx,.ts,.jsx,.js src/ && prettier --check src/",
+    "lint:fix": "eslint --ext .tsx,.ts,.jsx,.js src/ && prettier --write src/"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "rules": {
+      "prefer-const": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -50,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.5"
+    "@types/react-router-dom": "^5.1.5",
+    "eslint-config-prettier": "^6.11.0",
+    "prettier": "2.0.5"
   }
 }

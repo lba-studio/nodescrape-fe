@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime';
+import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-export default function(pastTime: Date): string {
+export default function (pastTime: Date): string {
   return dayjs(pastTime).fromNow();
 }
