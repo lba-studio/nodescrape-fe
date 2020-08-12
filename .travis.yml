@@ -3,13 +3,12 @@ addons:
   chrome: stable
 language: node_js
 cache: npm
-node_js:
-  - '10'
 branches:
   only:
     - master
 script:
   - npm install
+  - npm run lint
   - npm run build
 deploy:
   - provider: s3
