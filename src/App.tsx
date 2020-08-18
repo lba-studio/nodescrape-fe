@@ -7,6 +7,9 @@ import {
   withStyles,
   WithStyles,
   Divider,
+  useTheme,
+  makeStyles,
+  CssBaseline,
 } from "@material-ui/core";
 import { appTheme } from "./styles";
 import Footer from "./components/Footer";
@@ -18,43 +21,44 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ContributePage from "./pages/ContributePage";
 import FeedbackPage from "./pages/FeedbackPage";
 import TopicPage from "./pages/TopicPage";
+import WelcomeDialog from "./components/dialogs/WelcomeDialog";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      textAlign: "center",
-    },
-    contentRoot: {
-      margin: theme.spacing(4),
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  contentRoot: {
+    textAlign: "center",
+    padding: theme.spacing(4),
+    minHeight: "100%",
+  },
+}));
 
-const App: React.FC<WithStyles<typeof styles>> = (props) => {
-  const { classes } = props;
+function ContentRoot() {
+  const classes = useStyles();
+  return (
+    <div className={classes.contentRoot}>
+      <FeedbackPage />
+      <Divider />
+      <WelcomeDialog />
+      <Router history={Routing.history}>
+        <Switch>
+          <Route exact path={["/sources"]} component={NewsSourceScoresPage} />
+          <Route exact path={["/about"]} component={ContributePage} />
+          <Route exact path={["/", "/topics"]} component={TopicPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Router>
+      <Footer />
+    </div>
+  );
+}
+
+const App = () => {
   return (
     <MuiThemeProvider theme={appTheme}>
-      <div className={classes.root}>
-        <Header />
-        <div className={classes.contentRoot}>
-          <FeedbackPage />
-          <Divider />
-          <Router history={Routing.history}>
-            <Switch>
-              <Route
-                exact
-                path={["/sources"]}
-                component={NewsSourceScoresPage}
-              />
-              <Route exact path={["/about"]} component={ContributePage} />
-              <Route exact path={["/", "/topics"]} component={TopicPage} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </Router>
-        </div>
-        <Footer />
-      </div>
+      <CssBaseline />
+      <Header />
+      <ContentRoot />
     </MuiThemeProvider>
   );
 };
 
-export default withStyles(styles)(App);
+export default App;
