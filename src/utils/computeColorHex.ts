@@ -4,7 +4,6 @@
  * @param ratio a number from -1 to 1
  */
 export default function (ratio: number): string {
-  const colorMultiplier = 1.25;
   const perc = Math.min((ratio + 1) * 50, 100);
   return computeColor(perc);
 }

@@ -11,7 +11,6 @@ import TutorialDialog from "./TutorialDialog";
 const FIRST_TIME_USER_KEY = "firstTimeUser";
 
 function isFirstTimeUser() {
-  return true;
   const firstTimeUserVal = localStorage.getItem(FIRST_TIME_USER_KEY);
   return firstTimeUserVal === null;
 }
@@ -22,7 +21,7 @@ function toggleIsNotFirstTimeUser() {
 
 const WelcomeDialog: React.FC = () => {
   const [dialogOpen, setDialogOpen] = React.useState(isFirstTimeUser());
-  const [shouldRenderTutorial, setShouldRenderTutorial] = React.useState(true);
+  const [shouldRenderTutorial, setShouldRenderTutorial] = React.useState(false);
   const onTutorial = () => {
     setDialogOpen(false);
     setShouldRenderTutorial(true);

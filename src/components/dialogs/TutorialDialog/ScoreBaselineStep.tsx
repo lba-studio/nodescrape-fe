@@ -1,12 +1,8 @@
 import React from "react";
 import {
-  makeStyles,
   DialogTitle,
   DialogContent,
-  Box,
   Typography,
-  useMediaQuery,
-  useTheme,
   Grid,
 } from "@material-ui/core";
 import LightbulbIcon from "../../../assets/lightbulb-regular.svg";

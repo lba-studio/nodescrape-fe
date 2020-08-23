@@ -2,12 +2,7 @@ import React from "react";
 import "./App.css";
 import {
   MuiThemeProvider,
-  Theme,
-  createStyles,
-  withStyles,
-  WithStyles,
   Divider,
-  useTheme,
   makeStyles,
   CssBaseline,
 } from "@material-ui/core";
