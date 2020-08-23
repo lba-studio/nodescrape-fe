@@ -18,7 +18,7 @@ const ScoreCalculationStep: React.FC = () => {
       <DialogTitle>How do we calculate scores?</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={3}>
+          <Grid container item xs={12} sm={3} justify="center">
             <ImageContainer src={RobotIcon} alt="" />
           </Grid>
           <Grid item xs={12} sm={9}>

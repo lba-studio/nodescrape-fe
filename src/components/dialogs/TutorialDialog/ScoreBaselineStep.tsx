@@ -18,7 +18,7 @@ const ScoreBaselineStep: React.FC = () => {
       <DialogTitle>How do you feel after reading the news?</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={3}>
+          <Grid container item xs={12} sm={3} justify="center">
             <ImageContainer src={LightbulbIcon} alt="" />
           </Grid>
           <Grid item xs={12} sm={9}>
