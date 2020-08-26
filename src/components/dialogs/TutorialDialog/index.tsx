@@ -10,8 +10,13 @@ const steps = [
   ScoreCalculationStep,
 ] as const;
 
-const TutorialDialog = () => {
-  const [dialogOpen, setDialogOpen] = React.useState(true);
+interface TutorialDialogProps {
+  dialogOpen: boolean;
+  setDialogOpen: (nextVal: boolean) => void;
+}
+
+const TutorialDialog = (props: TutorialDialogProps) => {
+  const { dialogOpen, setDialogOpen } = props;
   const [stepNumber, setStepNumber] = React.useState(0);
   const totalNumberOfSteps = steps.length;
   const CurrentStep = steps[stepNumber];
@@ -19,7 +24,7 @@ const TutorialDialog = () => {
     if (stepNumber >= totalNumberOfSteps) {
       setDialogOpen(false);
     }
-  }, [stepNumber, totalNumberOfSteps]);
+  }, [stepNumber, totalNumberOfSteps, setDialogOpen]);
   return (
     <>
       <Dialog onClose={() => setDialogOpen(false)} open={dialogOpen}>

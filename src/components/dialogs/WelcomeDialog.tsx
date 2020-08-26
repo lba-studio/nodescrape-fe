@@ -44,7 +44,10 @@ const WelcomeDialog: React.FC = () => {
       </DialogActions>
     </Dialog>
   ) : (
-    <TutorialDialog />
+    <TutorialDialog
+      dialogOpen={shouldRenderTutorial}
+      setDialogOpen={setShouldRenderTutorial}
+    />
   );
 };
 
