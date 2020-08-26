@@ -4,7 +4,7 @@ import { Divider, Typography, Link } from "@material-ui/core";
 const Footer: React.FC = () => (
   <>
     <Divider />
-    <Typography variant="subtitle1">
+    <Typography align="center" variant="subtitle1">
       This project is made with love (and coffee) by{" "}
       <Link
         target="_blank"
@@ -15,7 +15,7 @@ const Footer: React.FC = () => (
       </Link>
       .
     </Typography>
-    <Typography variant="subtitle1">
+    <Typography align="center" variant="subtitle1">
       <Link
         target="_blank"
         rel="noopener noreferrer"
