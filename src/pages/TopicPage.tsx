@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TopicPage: React.FC = () => {
-  const [topic, setTopic] = React.useState("donald trump");
+  const [topic, setTopic] = React.useState("");
   const [data, setData] = React.useState<GetTopicResult | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -58,9 +58,6 @@ const TopicPage: React.FC = () => {
       .catch((e) => setError(parseError(e)))
       .finally(() => setIsLoading(false));
   }
-  React.useEffect(() => {
-    loadData();
-  }, []);
   return (
     <>
       <PageSection>
