@@ -5,13 +5,19 @@ import {
   Typography,
   Button,
   LinearProgress,
+  Box,
 } from "@material-ui/core";
 import PageSection from "../components/PageSection";
 import TopicService, { GetTopicResult } from "../services/TopicService";
 import parseError from "../utils/parseError";
 import TopicSearchResult from "../components/TopicSearchResult";
+import ImageContainer from "../components/ImageContainer";
+import PencilIcon from "../assets/pencil-alt-solid.svg";
 
 const useStyles = makeStyles((theme) => ({
+  logo: {
+    margin: theme.spacing(1),
+  },
   topicSearchField: {
     width: "100%",
   },
@@ -35,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TopicPage: React.FC = () => {
-  const [topic, setTopic] = React.useState("");
+  const [topic, setTopic] = React.useState("donald trump");
   const [data, setData] = React.useState<GetTopicResult | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -52,10 +58,22 @@ const TopicPage: React.FC = () => {
       .catch((e) => setError(parseError(e)))
       .finally(() => setIsLoading(false));
   }
+  React.useEffect(() => {
+    loadData();
+  }, []);
   return (
     <>
       <PageSection>
-        <Typography variant="h1">Topic Sentiment Viewer</Typography>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <ImageContainer
+            src={PencilIcon}
+            variant="logo"
+            className={classes.logo}
+            alt="Logo"
+            aria-label="logo"
+          />
+          <Typography variant="h1">Topics</Typography>
+        </Box>
         <Typography variant="subtitle1">
           How negative are your everyday topics?
         </Typography>
@@ -64,7 +82,6 @@ const TopicPage: React.FC = () => {
         <TextField
           id="search-topic-query"
           label="Search for a topic"
-          helperText="(e.g. you can search for Donald Trump or Coronavirus)"
           margin="normal"
           name="searchTopicQuery"
           fullWidth

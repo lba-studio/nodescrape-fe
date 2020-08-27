@@ -3,22 +3,25 @@ export const appTheme = responsiveFontSizes(
   createMuiTheme({
     typography: {
       h1: {
-        // fontSize: "3rem",
-      },
-      h2: {
-        // fontSize: "2.5rem",
+        fontWeight: 700,
       },
       h3: {
-        // fontSize: "2rem",
-        fontWeight: 300,
-      },
-      h4: {
-        // fontSize: "1.5rem",
+        fontWeight: 400,
       },
       body1: {
         lineHeight: 1,
         marginBottom: "0.5rem",
       },
+      subtitle1: {
+        fontWeight: 500,
+        letterSpacing: 2,
+      },
+      fontFamily: [
+        "Montserrat",
+        "Roboto",
+        "-apple-system",
+        "BlinkMacSystemFont",
+      ].join(","),
     },
     overrides: {
       MuiCardHeader: {
@@ -33,14 +36,14 @@ export const appTheme = responsiveFontSizes(
         },
       },
     },
-    // palette: {
-    //   type: "dark",
-    //   primary: {
-    //     main: "#054A91",
-    //   },
-    //   secondary: {
-    //     main: "#3E7CB1",
-    //   },
-    // },
+    palette: {
+      // type: "dark",
+      primary: {
+        main: "#054A91",
+      },
+      secondary: {
+        main: "#3E7CB1",
+      },
+    },
   })
 );

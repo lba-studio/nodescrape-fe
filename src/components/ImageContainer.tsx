@@ -3,10 +3,6 @@ import { CircularProgress, makeStyles } from "@material-ui/core";
 import BlockIcon from "@material-ui/icons/Block";
 import clsx from "clsx";
 
-interface ImageContainerProps {
-  forceFit?: boolean;
-}
-
 const useStyles = makeStyles({
   forceFit: {
     minWidth: 0,
@@ -15,6 +11,18 @@ const useStyles = makeStyles({
     height: "100%",
   },
 });
+
+const useVariantStyles = makeStyles({
+  logo: {
+    maxWidth: "64px",
+    maxHeight: "64px",
+  },
+});
+
+interface ImageContainerProps {
+  forceFit?: boolean;
+  variant?: keyof ReturnType<typeof useVariantStyles>;
+}
 
 function ImageContainer(
   props: React.DetailedHTMLProps<
@@ -25,8 +33,8 @@ function ImageContainer(
 ) {
   const [isLoading, setIsLoading] = React.useState(true);
   const [hasErrored, setHasErrored] = React.useState(false);
-  const classes = useStyles();
-  const { forceFit = true, className, ...restOfProps } = props;
+  const classes = { ...useStyles(), ...useVariantStyles() };
+  const { forceFit = true, className, variant, ...restOfProps } = props;
   if (hasErrored) {
     return <BlockIcon />;
   }
@@ -43,9 +51,15 @@ function ImageContainer(
         }}
         alt=""
         {...restOfProps}
-        className={clsx({
-          [classes.forceFit]: forceFit,
-        })}
+        className={clsx(
+          {
+            [classes.forceFit]: forceFit,
+          },
+          {
+            [classes.logo]: variant,
+          },
+          className
+        )}
       />
     </>
   );

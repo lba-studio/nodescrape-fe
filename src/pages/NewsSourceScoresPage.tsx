@@ -11,17 +11,17 @@ import NewsSourceScoreService, {
 } from "../services/NewsSourceScoreService";
 import MagGlassIcon from "../assets/magnifying_glass_icon.svg";
 import NewsSourceScoreDisplay from "../components/NewsSourceScoreDisplay";
+import ImageContainer from "../components/ImageContainer";
 
 const useStyles = makeStyles((theme) => ({
   dataCard: {
     margin: theme.spacing(2),
   },
-  logo: {
-    maxWidth: "128px",
-    maxHeight: "128px",
-  },
   filter: {
     flexBasis: "128px",
+  },
+  logo: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -83,17 +83,19 @@ const HomePage: React.FC = (props) => {
   return (
     <>
       <PageSection>
-        <img
-          className={classes.logo}
-          src={MagGlassIcon}
-          alt="Logo"
-          aria-label="logo"
-        />
-        <Typography variant="h1">News Neutrality Watcher</Typography>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <ImageContainer
+            src={MagGlassIcon}
+            variant="logo"
+            alt="Logo"
+            aria-label="logo"
+            className={classes.logo}
+          />
+          <Typography variant="h1">Sources</Typography>
+        </Box>
         <Typography variant="subtitle1">
           How positive/negative is your news source?
         </Typography>
-        <Explanation />
       </PageSection>
       <PageSection>
         {isLoading && <LinearProgress />}

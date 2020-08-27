@@ -61,7 +61,6 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
   }, [filters, onFilterChange]);
   return (
     <>
-      <Typography variant="h2">Filters</Typography>
       <form>
         <Box
           display="flex"
