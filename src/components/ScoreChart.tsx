@@ -52,7 +52,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
                 formatter: (value, context) => {
                   return `${newsSourceScores[context.dataIndex].name} ${value}`;
                 },
-                color: "black",
+                color: "white",
                 // backgroundColor: 'white',
                 align: getAlignAnchor,
                 anchor: getAlignAnchor,

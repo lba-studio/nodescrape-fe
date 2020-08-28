@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const Header: React.FC = () => {
   const classes = useStyles();
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" color="default">
       <Toolbar>
         <Typography className={classes.siteTitle}>
           {siteTitle} (BETA)

@@ -8,6 +8,7 @@ import {
   Button,
   makeStyles,
   TextField,
+  Grid,
 } from "@material-ui/core";
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import countryUtil from "../utils/countryUtil";
@@ -22,21 +23,6 @@ export interface Filters {
   name: string;
 }
 
-const useStyles = makeStyles((theme) => ({
-  mediumFilter: {
-    flexBasis: "128px",
-  },
-  textFilter: {
-    flexBasis: "256px",
-  },
-  item: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginTop: "auto",
-    marginBottom: "auto",
-  },
-}));
-
 const initialState: Filters = {
   country: "",
   name: "",
@@ -44,7 +30,6 @@ const initialState: Filters = {
 
 const FilterBox: React.FC<FilterBoxProps> = (props) => {
   const { newsSourceScores, onFilterChange } = props;
-  const classes = useStyles();
   const [filters, setFilters] = React.useState<Filters>({
     ...initialState,
     country: countryUtil.getLocation() || initialState.country,
@@ -61,50 +46,36 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
   return (
     <>
       <form>
-        <Box
-          display="flex"
-          flexDirection="row"
-          flexWrap="wrap"
-          justifyContent="center"
-        >
-          <TextField
-            // required
-            id="search-query"
-            label="By News Source Name"
-            margin="normal"
-            name="searchQuery"
-            value={filters.name}
-            onChange={(event) =>
-              setFilters({ ...filters, name: event.target.value as string })
-            }
-            variant="outlined"
-            className={classes.textFilter}
-            // InputLabelProps={{ shrink: true }}
-            // fullWidth
-          />
-          <FormControl
-            margin="normal"
-            className={classes.mediumFilter + " " + classes.item}
-          >
-            <InputLabel
-              // shrink
-              id="choose-country-filter-label"
-              htmlFor="choose-country-filter"
-            >
-              By Country
-            </InputLabel>
-            <Select
-              labelId="choose-country-filter-label"
+        <Grid container spacing={1} justify="center" alignItems="center">
+          <Grid item xs={12} sm={8} md={6}>
+            <TextField
+              id="search-query"
+              label="By News Source Name"
+              name="searchQuery"
+              value={filters.name}
+              onChange={(event) =>
+                setFilters({ ...filters, name: event.target.value as string })
+              }
+              fullWidth
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4}>
+            <TextField
               id="choose-country-filter"
-              value={filters.country}
+              variant="outlined"
               onChange={(event) =>
                 setFilters({
                   ...filters,
                   country: event.target.value as string,
                 })
               }
+              value={filters.country}
+              label="By Country"
+              select
+              fullWidth
             >
-              <MenuItem value="">
+              <MenuItem key="" value="">
                 <em>None</em>
               </MenuItem>
               {countryOptions.map((countryOption) => (
@@ -112,21 +83,17 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
                   {countryOption}
                 </MenuItem>
               ))}
-            </Select>
-          </FormControl>
-          {/* <div className={classes.item}>
-            <Button color="primary" variant="contained" className="" onClick={() => onFilterChange(filters)}>Submit</Button>
-          </div> */}
-          <div className={classes.item}>
+            </TextField>
+          </Grid>
+          <Grid item>
             <Button
               variant="contained"
-              className=""
               onClick={() => setFilters(initialState)}
             >
               Clear
             </Button>
-          </div>
-        </Box>
+          </Grid>
+        </Grid>
       </form>
     </>
   );

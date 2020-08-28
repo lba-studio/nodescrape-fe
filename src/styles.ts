@@ -32,14 +32,23 @@ export const appTheme = responsiveFontSizes(
       MuiTableCell: {
         head: {
           fontWeight: 700,
-          color: "#666666",
+          // color: "#666666",
+        },
+      },
+      MuiLink: {
+        root: {
+          "&:hover": {
+            color: "#fff",
+          },
+          // color: "#afafaf",
+          transition: "color 0.5s",
         },
       },
     },
     palette: {
-      // type: "dark",
+      type: "dark",
       primary: {
-        main: "#054A91",
+        main: "#fca311",
       },
       secondary: {
         main: "#3E7CB1",

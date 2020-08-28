@@ -19,6 +19,7 @@ import {
   DialogActions,
   Button,
   Card,
+  Link,
 } from "@material-ui/core";
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import computeColorHex from "../utils/computeColorHex";
@@ -142,13 +143,13 @@ const NewsSourceScoreDisplay: React.FC<NewsSourceScoreDisplayProps> = (
               </Box>
             </DialogTitle>
             <DialogContent>
-              <a
+              <Link
                 href={dialogData.data.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {dialogData.data.url}
-              </a>
+              </Link>
               <Typography>
                 News score: {dialogData.data.score.toFixed(3)}
               </Typography>

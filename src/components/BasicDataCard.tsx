@@ -5,6 +5,7 @@ import {
   Theme,
   createStyles,
   WithStyles,
+  useTheme,
 } from "@material-ui/core";
 import React from "react";
 import computeColorHex from "../utils/computeColorHex";
@@ -31,15 +32,15 @@ const styles = (theme: Theme) =>
 const BasicDataCard: React.FC<BasicDataCardProp & WithStyles<typeof styles>> = (
   props
 ) => {
+  const theme = useTheme();
   const { classes, label, data, extraDataLabel } = props;
+  const backgroundColor = computeColorHex(data || 0);
+  const color = theme.palette.getContrastText(backgroundColor);
   return (
     <Card>
       <Box display="flex" flexDirection="row">
         <div className={classes.label}>{label}</div>
-        <div
-          className={classes.score}
-          style={{ backgroundColor: computeColorHex(data || 0) }}
-        >
+        <div className={classes.score} style={{ backgroundColor, color }}>
           {data
             ? `${data.toFixed(4)}${
                 extraDataLabel ? ` (${extraDataLabel})` : ""

@@ -93,7 +93,7 @@ const HomePage: React.FC = (props) => {
           <Typography variant="h1">Sources</Typography>
         </Box>
         <Typography variant="subtitle1">
-          How positive/negative is your news source?
+          Is your news source too positive/negative?
         </Typography>
       </PageSection>
       <PageSection>
