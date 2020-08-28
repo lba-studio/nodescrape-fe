@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  makeStyles,
-  TextField,
-  Grid,
-} from "@material-ui/core";
+import { MenuItem, Button, TextField, Grid } from "@material-ui/core";
 import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import countryUtil from "../utils/countryUtil";
 
