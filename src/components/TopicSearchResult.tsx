@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
   },
   newsArticleCardContainer: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   },
   media: {
     height: "128px",
@@ -49,7 +49,7 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
   }
   return (
     <>
-      <PageSection>
+      <PageSection fullWidth>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Tooltip

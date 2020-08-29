@@ -5,11 +5,14 @@ export const appTheme = responsiveFontSizes(
       h1: {
         fontWeight: 700,
       },
+      h2: {
+        fontWeight: 500,
+      },
       h3: {
         fontWeight: 400,
       },
       body1: {
-        lineHeight: 1,
+        lineHeight: 1.5,
         marginBottom: "0.5rem",
       },
       subtitle1: {

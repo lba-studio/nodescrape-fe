@@ -20,6 +20,10 @@ const ContributePage = () => {
             About Us
           </Typography>
         </Box>
+        <Typography variant="subtitle1" align="center">
+          Why we do what we do
+        </Typography>
+        <Typography variant="h2">The news is broken.</Typography>
         <Typography>
           The news is an integral part of our lives. We listen to news outlets
           in order to obtain the latest information regarding events which are

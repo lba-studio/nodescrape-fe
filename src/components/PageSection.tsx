@@ -1,22 +1,36 @@
 import React from "react";
-import { Theme, createStyles, WithStyles, withStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import clsx from "clsx";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    section: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  section: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    maxWidth: "1000px",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  fullWidth: {
+    maxWidth: "100%",
+  },
+}));
 
-const PageSection: React.FC<
-  WithStyles<typeof styles> & { className?: string }
-> = (props) => {
+interface PageSectionProps {
+  children: React.ReactNode;
+  fullWidth?: boolean;
+}
+
+const PageSection: React.FC<PageSectionProps> = (props) => {
+  const classes = useStyles();
   return (
-    <div className={props.classes.section + " " + (props.className || "")}>
+    <div
+      className={clsx(classes.section, {
+        [classes.fullWidth]: props.fullWidth,
+      })}
+    >
       {props.children}
     </div>
   );
 };
 
-export default withStyles(styles)(PageSection);
+export default PageSection;

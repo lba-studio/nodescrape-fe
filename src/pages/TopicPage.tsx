@@ -71,25 +71,27 @@ const TopicPage: React.FC = () => {
           How negative are your everyday topics?
         </Typography>
       </PageSection>
-      <form onSubmit={onSearch} className={classes.topicSearchFormContainer}>
-        <TextField
-          id="search-topic-query"
-          label="Search for a topic"
-          margin="normal"
-          name="searchTopicQuery"
-          fullWidth
-          value={topic}
-          onChange={(event) => setTopic(event.target.value as string)}
-          variant="outlined"
-          className={classes.topicSearchField}
-          required
-        />
-        <div className={classes.topicSearchFormElement}>
-          <Button variant="contained" color="primary" type="submit">
-            Search
-          </Button>
-        </div>
-      </form>
+      <PageSection>
+        <form onSubmit={onSearch} className={classes.topicSearchFormContainer}>
+          <TextField
+            id="search-topic-query"
+            label="Search for a topic"
+            margin="normal"
+            name="searchTopicQuery"
+            fullWidth
+            value={topic}
+            onChange={(event) => setTopic(event.target.value as string)}
+            variant="outlined"
+            className={classes.topicSearchField}
+            required
+          />
+          <div className={classes.topicSearchFormElement}>
+            <Button variant="contained" color="primary" type="submit">
+              Search
+            </Button>
+          </div>
+        </form>
+      </PageSection>
       {isLoading && <LinearProgress />}
       {error && error}
       {data && <TopicSearchResult getTopicResult={data} />}

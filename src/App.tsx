@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
   contentRoot: {
     padding: theme.spacing(4),
     minHeight: "100%",
-    maxWidth: "1000px",
-    marginLeft: "auto",
-    marginRight: "auto",
   },
 }));
 
