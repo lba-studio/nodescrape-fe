@@ -15,9 +15,6 @@ import ImageContainer from "../components/ImageContainer";
 import PencilIcon from "../assets/pencil-alt-solid.svg";
 
 const useStyles = makeStyles((theme) => ({
-  logo: {
-    margin: theme.spacing(1),
-  },
   topicSearchField: {
     width: "100%",
   },
@@ -65,13 +62,12 @@ const TopicPage: React.FC = () => {
           <ImageContainer
             src={PencilIcon}
             variant="logo"
-            className={classes.logo}
             alt="Logo"
             aria-label="logo"
           />
           <Typography variant="h1">Topics</Typography>
         </Box>
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" align="center">
           How negative are your everyday topics?
         </Typography>
       </PageSection>

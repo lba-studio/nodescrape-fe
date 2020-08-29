@@ -97,7 +97,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   console.debug("Rerendering chart!");
   return (
     <>
-      <Typography>
+      <Typography align="center">
         {isMobile ? "Click on" : "Hover over"} the bars for more information!
       </Typography>
       <div

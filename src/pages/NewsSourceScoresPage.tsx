@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   filter: {
     flexBasis: "128px",
   },
-  logo: {
-    margin: theme.spacing(1),
-  },
 }));
 
 const HomePage: React.FC = (props) => {
@@ -88,18 +85,17 @@ const HomePage: React.FC = (props) => {
             variant="logo"
             alt="Logo"
             aria-label="logo"
-            className={classes.logo}
           />
           <Typography variant="h1">Sources</Typography>
         </Box>
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" align="center">
           Is your news source too positive/negative?
         </Typography>
       </PageSection>
       <PageSection>
         {isLoading && <LinearProgress />}
         {error && (
-          <Typography color="error">
+          <Typography color="error" align="center">
             An error has occurred. Please try again later.
           </Typography>
         )}
@@ -141,11 +137,13 @@ const HomePage: React.FC = (props) => {
                 </PageSection>
               </>
             ) : (
-              <Typography>No matching news sources can be found.</Typography>
+              <Typography align="center">
+                No matching news sources can be found.
+              </Typography>
             )}
           </>
         ) : (
-          <Typography variant="h3">
+          <Typography variant="h3" align="center">
             We can't seem to find any data. Please come back again later!
           </Typography>
         ))}

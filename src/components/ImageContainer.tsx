@@ -12,12 +12,13 @@ const useStyles = makeStyles({
   },
 });
 
-const useVariantStyles = makeStyles({
+const useVariantStyles = makeStyles((theme) => ({
   logo: {
     maxWidth: "64px",
     maxHeight: "64px",
+    margin: theme.spacing(1),
   },
-});
+}));
 
 interface ImageContainerProps {
   forceFit?: boolean;

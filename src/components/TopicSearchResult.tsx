@@ -66,19 +66,23 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
                 <InfoIcon className={classes.infoIcon} />
               </Box>
             </Tooltip>
-            <Typography variant="h3">
+            <Typography variant="h3" align="center">
               {getTopicResult.score.toFixed(4)}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant="h4">News articles analyzed</Typography>
-            <Typography variant="h3">
+            <Typography variant="h4" align="center">
+              News articles analyzed
+            </Typography>
+            <Typography variant="h3" align="center">
               {getTopicResult.newsArticlesAnalyzed}
             </Typography>
           </Grid>
           <Grid item container xs={12} justify="center">
             <Grid item xs={12}>
-              <Typography variant="h2">Sample news articles</Typography>
+              <Typography variant="h2" align="center">
+                Sample news articles
+              </Typography>
             </Grid>
             {getTopicResult.sampleAnalyzedArticles
               .slice(0, 4)

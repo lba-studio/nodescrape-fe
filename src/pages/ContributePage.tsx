@@ -1,15 +1,25 @@
 import React from "react";
-import { Typography, Link } from "@material-ui/core";
+import { Typography, Link, Box } from "@material-ui/core";
 import { siteTitle } from "../config/constants";
 import PageSection from "../components/PageSection";
+import ImageContainer from "../components/ImageContainer";
+import BinocularIcon from "../assets/binoculars-solid.svg";
 
 const ContributePage = () => {
   return (
     <>
       <PageSection>
-        <Typography variant="h1" id="about-us">
-          About Us
-        </Typography>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <ImageContainer
+            src={BinocularIcon}
+            variant="logo"
+            alt="Logo"
+            aria-label="logo"
+          />
+          <Typography variant="h1" id="about-us">
+            About Us
+          </Typography>
+        </Box>
         <Typography>
           The news is an integral part of our lives. We listen to news outlets
           in order to obtain the latest information regarding events which are

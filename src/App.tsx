@@ -14,9 +14,11 @@ import WelcomeDialog from "./components/dialogs/WelcomeDialog";
 
 const useStyles = makeStyles((theme) => ({
   contentRoot: {
-    textAlign: "center",
     padding: theme.spacing(4),
     minHeight: "100%",
+    maxWidth: "1000px",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 }));
 
