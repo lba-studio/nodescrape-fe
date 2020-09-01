@@ -7,6 +7,21 @@ import useIsMobile from "../utils/useIsMobile";
 import { Typography } from "@material-ui/core";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Align, Anchor } from "chartjs-plugin-datalabels/types/options";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Tooltip,
+  XAxis,
+  Legend,
+  Cell,
+  CartesianGrid,
+  YAxis,
+  LabelList,
+  Label,
+  LabelProps,
+  Text,
+} from "recharts";
 
 interface ScoreChartProps {
   newsSourceScores: Array<NewsSourceScore>;
@@ -20,103 +35,76 @@ function getAlignAnchor(ctx: Parameters<Chart.Scriptable<Align | Anchor>>[0]) {
   return getDataFromCtx(ctx) > 0 ? "start" : "end";
 }
 
+function mapToLabel(e: NewsSourceScore) {
+  return {
+    value: e.name,
+    payload: e,
+  };
+}
+
+function CustomLabel(props: LabelProps) {
+  const { x, y, stroke, value, height = 0, offset = 0 } = props;
+  console.log(props);
+  if (value! > 0) {
+    return (
+      <Text
+        x={x! - offset}
+        y={y! + height / 2}
+        textAnchor="end"
+        stroke="white"
+        verticalAnchor="middle"
+      >
+        {Number(value).toFixed(2)}
+      </Text>
+    );
+  } else {
+    return (
+      <Text
+        x={x! + offset}
+        y={y! + height / 2}
+        textAnchor="start"
+        stroke="white"
+        verticalAnchor="middle"
+      >
+        {Number(value).toFixed(2)}
+      </Text>
+    );
+  }
+}
+
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const { newsSourceScores } = props;
-  const chartRef = React.useRef<Chart | null>(null);
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const isMobile = useIsMobile();
-  React.useEffect(() => {
-    console.debug("isMobile:", isMobile);
-    const canvasContext: CanvasRenderingContext2D = _.invoke(
-      canvasRef,
-      "current.getContext",
-      "2d"
-    );
-    if (canvasContext) {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-      chartRef.current = new Chart(canvasContext, {
-        plugins: [ChartDataLabels],
-        type: "horizontalBar",
-        data: {
-          labels: newsSourceScores.map((score) => score.name),
-          datasets: [
-            {
-              label: "Average sentiment score",
-              data: newsSourceScores.map((score) =>
-                Number(score.score.toFixed(3))
-              ),
-              backgroundColor: (ctx) => computeColorHex(getDataFromCtx(ctx)),
-              datalabels: {
-                formatter: (value, context) => {
-                  return `${newsSourceScores[context.dataIndex].name} ${value}`;
-                },
-                color: "white",
-                // backgroundColor: 'white',
-                align: getAlignAnchor,
-                anchor: getAlignAnchor,
-              },
-            },
-          ],
-        },
-        options: {
-          layout: {
-            // padding: 0,
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  autoSkip: false,
-                },
-                display: false,
-              },
-            ],
-            xAxes: [
-              {
-                ticks: {
-                  // autoSkip: false,
-                  beginAtZero: true,
-                  suggestedMin: -0.2,
-                  suggestedMax: 0.2,
-                },
-              },
-            ],
-          },
-        },
-      });
-      console.debug("Rendering chart.", newsSourceScores);
-    }
-  }, [newsSourceScores, isMobile]);
-  console.debug("Rerendering chart!");
+  const positiveNewsSourceScoresLabelData = React.useMemo(
+    () => newsSourceScores.filter((e) => e.score >= 0).map(mapToLabel),
+    [newsSourceScores]
+  );
+  const negativeNewsSourceScoresLabelData = React.useMemo(
+    () => newsSourceScores.filter((e) => e.score < 0).map(mapToLabel),
+    [newsSourceScores]
+  );
+
   return (
     <>
-      <Typography align="center">
-        {isMobile ? "Click on" : "Hover over"} the bars for more information!
-      </Typography>
-      <div
-        style={{
-          minHeight: `${
-            newsSourceScores.length * 44 || 44
-          }px` /** I hate this solution... but the height automatically to the smallest height possible on mobile!!! */,
-        }}
-      >
-        <canvas
-          aria-label="graph for scores"
-          role="img"
-          ref={canvasRef}
-          // height={`${newsSourceScores.length * 22 || 22}px`}
-        >
-          Score graph goes here. Your browser may not support this
-          functionality.
-        </canvas>
-      </div>
+      <ResponsiveContainer width="100%" height={newsSourceScores.length * 44}>
+        <BarChart layout="vertical" data={newsSourceScores} maxBarSize={22}>
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+
+          <Bar dataKey="score" label={CustomLabel}>
+            {newsSourceScores.map((e, index) => (
+              <Cell key={index} fill={computeColorHex(e.score)} />
+            ))}
+            {/* {newsSourceScores.map((e, index) => (
+              <Label key={index} value={e.name} position="insideRight" />
+            ))} */}
+            {/* <LabelList dataKey="name" position="left" /> */}
+          </Bar>
+          <XAxis type="number" />
+          <YAxis hide type="category" dataKey="name" />
+          {/* <Tooltip /> */}
+          {/* <Legend /> */}
+        </BarChart>
+      </ResponsiveContainer>
     </>
   );
 };
