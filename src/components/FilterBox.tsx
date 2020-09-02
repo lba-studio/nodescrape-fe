@@ -70,7 +70,7 @@ const FilterBox: React.FC<FilterBoxProps> = (props) => {
               </MenuItem>
               {countryOptions.map((countryOption) => (
                 <MenuItem key={countryOption} value={countryOption}>
-                  {countryOption}
+                  {countryUtil.toPrettyName(countryOption)}
                 </MenuItem>
               ))}
             </TextField>
