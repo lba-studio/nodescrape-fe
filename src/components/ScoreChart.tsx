@@ -58,6 +58,9 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const classes = useStyles();
   const onBarClick = React.useCallback(
     (event, chartElement) => {
+      if (!chartElement?.length) {
+        return;
+      }
       const elementIndex = chartElement[0]._index;
       const newsSourceScore = newsSourceScores[elementIndex];
       const colorHex = computeColorHex(newsSourceScore.score);
