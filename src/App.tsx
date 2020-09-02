@@ -48,17 +48,15 @@ function ContentRoot() {
   return (
     <div className={classes.contentRoot}>
       <WelcomeDialog />
-      <Router history={Routing.history}>
-        <Switch>
-          <Route exact path={["/sources"]} component={NewsSourceScoresPage} />
-          <Route exact path={["/about"]} component={ContributePage} />
-          <Route exact path={["/topics"]} component={TopicPage} />
-          <Route exact path={["/"]}>
-            <Redirect to="/topics" />
-          </Route>
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route exact path={["/sources"]} component={NewsSourceScoresPage} />
+        <Route exact path={["/about"]} component={ContributePage} />
+        <Route exact path={["/topics"]} component={TopicPage} />
+        <Route exact path={["/"]}>
+          <Redirect to="/topics" />
+        </Route>
+        <Route component={NotFoundPage} />
+      </Switch>
       <Footer />
     </div>
   );
@@ -67,9 +65,11 @@ function ContentRoot() {
 const App = () => {
   return (
     <MuiThemeProvider theme={appTheme}>
-      <CssBaseline />
-      <Header />
-      <ContentRoot />
+      <Router history={Routing.history}>
+        <CssBaseline />
+        <Header />
+        <ContentRoot />
+      </Router>
     </MuiThemeProvider>
   );
 };

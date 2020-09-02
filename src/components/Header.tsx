@@ -5,9 +5,12 @@ import {
   Toolbar,
   Typography,
   Button,
+  Link,
 } from "@material-ui/core";
 import Routing from "../utils/Routing";
+import { Link as RouterLink } from "react-router-dom";
 import { siteTitle } from "../config/constants";
+import CombinedLink from "./CombinedLink";
 
 const useStyles = makeStyles((theme) => ({
   siteTitle: {
@@ -27,13 +30,13 @@ const Header: React.FC = () => {
         <Typography className={classes.siteTitle}>
           {siteTitle} (BETA)
         </Typography>
-        <Button color="inherit" onClick={() => Routing.goTo("/topics")}>
+        <Button color="inherit" component={RouterLink} to="/topics">
           Topics
         </Button>
-        <Button color="inherit" onClick={() => Routing.goTo("/sources")}>
+        <Button color="inherit" component={RouterLink} to="/sources">
           Sources
         </Button>
-        <Button color="inherit" onClick={() => Routing.goTo("/about")}>
+        <Button color="inherit" component={RouterLink} to="/about">
           About
         </Button>
       </Toolbar>
