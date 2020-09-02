@@ -11,7 +11,6 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Routing from "./utils/Routing";
-import WelcomeDialog from "./components/dialogs/WelcomeDialog";
 import loadable from "@loadable/component";
 
 const defaultLoadableConfig = {
@@ -32,6 +31,9 @@ const TopicPage = loadable(
 const NotFoundPage = loadable(
   () => import("./pages/NotFoundPage"),
   defaultLoadableConfig
+);
+const WelcomeDialog = loadable(() =>
+  import("./components/dialogs/WelcomeDialog")
 );
 
 const useStyles = makeStyles((theme) => ({
