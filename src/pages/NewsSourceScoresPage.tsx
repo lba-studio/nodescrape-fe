@@ -9,7 +9,6 @@ import NewsSourceScoreService, {
   NewsSourceScore,
 } from "../services/NewsSourceScoreService";
 import MagGlassIcon from "../assets/magnifying_glass_icon.svg";
-import NewsSourceScoreDisplay from "../components/NewsSourceScoreDisplay";
 import ImageContainer from "../components/ImageContainer";
 
 const useStyles = makeStyles((theme) => ({

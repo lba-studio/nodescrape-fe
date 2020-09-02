@@ -97,7 +97,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
       });
       console.debug("Rendering chart.", newsSourceScores);
     }
-  }, [newsSourceScores, isMobile]);
+  }, [newsSourceScores, isMobile, theme]);
   console.debug("Rerendering chart!");
   return (
     <>
