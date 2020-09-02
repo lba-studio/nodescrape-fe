@@ -132,9 +132,6 @@ const HomePage: React.FC = (props) => {
                     </div>
                   </Box>
                 </PageSection>
-                <PageSection>
-                  <NewsSourceScoreDisplay newsSourceScores={displayedScores} />
-                </PageSection>
               </>
             ) : (
               <Typography align="center">

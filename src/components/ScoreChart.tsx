@@ -4,7 +4,7 @@ import { NewsSourceScore } from "../services/NewsSourceScoreService";
 import _ from "lodash";
 import computeColorHex from "../utils/computeColorHex";
 import useIsMobile from "../utils/useIsMobile";
-import { Typography } from "@material-ui/core";
+import { Typography, useTheme } from "@material-ui/core";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Align, Anchor } from "chartjs-plugin-datalabels/types/options";
 
@@ -25,6 +25,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
   const chartRef = React.useRef<Chart | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const isMobile = useIsMobile();
+  const theme = useTheme();
   React.useEffect(() => {
     console.debug("isMobile:", isMobile);
     const canvasContext: CanvasRenderingContext2D = _.invoke(
@@ -56,6 +57,9 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
                 // backgroundColor: 'white',
                 align: getAlignAnchor,
                 anchor: getAlignAnchor,
+                font: {
+                  family: theme.typography.fontFamily,
+                },
               },
             },
           ],
