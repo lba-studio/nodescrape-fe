@@ -1,16 +1,38 @@
 import React from "react";
 import "./App.css";
-import { MuiThemeProvider, makeStyles, CssBaseline } from "@material-ui/core";
+import {
+  MuiThemeProvider,
+  makeStyles,
+  CssBaseline,
+  CircularProgress,
+} from "@material-ui/core";
 import { appTheme } from "./styles";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Routing from "./utils/Routing";
-import NewsSourceScoresPage from "./pages/NewsSourceScoresPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ContributePage from "./pages/ContributePage";
-import TopicPage from "./pages/TopicPage";
 import WelcomeDialog from "./components/dialogs/WelcomeDialog";
+import loadable from "@loadable/component";
+
+const defaultLoadableConfig = {
+  fallback: <CircularProgress />,
+};
+const NewsSourceScoresPage = loadable(
+  () => import("./pages/NewsSourceScoresPage"),
+  defaultLoadableConfig
+);
+const ContributePage = loadable(
+  () => import("./pages/ContributePage"),
+  defaultLoadableConfig
+);
+const TopicPage = loadable(
+  () => import("./pages/TopicPage"),
+  defaultLoadableConfig
+);
+const NotFoundPage = loadable(
+  () => import("./pages/NotFoundPage"),
+  defaultLoadableConfig
+);
 
 const useStyles = makeStyles((theme) => ({
   contentRoot: {
