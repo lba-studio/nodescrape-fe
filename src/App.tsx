@@ -5,6 +5,7 @@ import {
   makeStyles,
   CssBaseline,
   CircularProgress,
+  Box,
 } from "@material-ui/core";
 import { appTheme } from "./styles";
 import Footer from "./components/Footer";
@@ -14,7 +15,11 @@ import Routing from "./utils/Routing";
 import loadable from "@loadable/component";
 
 const defaultLoadableConfig = {
-  fallback: <CircularProgress />,
+  fallback: (
+    <Box display="flex" justifyContent="center" width="100%">
+      <CircularProgress />
+    </Box>
+  ),
 };
 const NewsSourceScoresPage = loadable(
   () => import("./pages/NewsSourceScoresPage"),
