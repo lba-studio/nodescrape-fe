@@ -6,6 +6,7 @@ import {
   CardActionArea,
   CardHeader,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import useIsMobile from "../utils/useIsMobile";
 
@@ -51,22 +52,27 @@ function TopicSuggestor(props: TopicSuggestorProps) {
   const numberOfItemsToDisplayPerRow = isMobile ? 2 : 3;
   const { onSuggestion } = props;
   return (
-    <Grid container spacing={1} justify="center">
-      {data.slice(0, numberOfItemsToDisplayPerRow).map((e) => (
-        <Grid item xs={6} sm={4}>
-          <Card>
-            <CardActionArea onClick={() => onSuggestion && onSuggestion(e)}>
-              <CardMedia
-                image={e.imgUrl}
-                className={classes.cardMedia}
-                title={e.topic}
-              />
-              <CardHeader className={classes.cardHeader} title={e.topic} />
-            </CardActionArea>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Typography gutterBottom variant="h2" align="center">
+        Trending Topics
+      </Typography>
+      <Grid container spacing={1} justify="center">
+        {data.slice(0, numberOfItemsToDisplayPerRow).map((e) => (
+          <Grid item xs={6} sm={4}>
+            <Card>
+              <CardActionArea onClick={() => onSuggestion && onSuggestion(e)}>
+                <CardMedia
+                  image={e.imgUrl}
+                  className={classes.cardMedia}
+                  title={e.topic}
+                />
+                <CardHeader className={classes.cardHeader} title={e.topic} />
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 }
 
