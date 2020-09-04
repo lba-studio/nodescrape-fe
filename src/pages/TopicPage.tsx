@@ -13,6 +13,7 @@ import parseError from "../utils/parseError";
 import TopicSearchResult from "../components/TopicSearchResult";
 import ImageContainer from "../components/ImageContainer";
 import PencilIcon from "../assets/pencil-alt-solid.svg";
+import TopicSuggestor from "../components/TopicSuggestor";
 
 const useStyles = makeStyles((theme) => ({
   topicSearchField: {
@@ -94,6 +95,17 @@ const TopicPage: React.FC = () => {
       </PageSection>
       {isLoading && <LinearProgress />}
       {error && error}
+      <PageSection>
+        <Typography gutterBottom variant="h2" align="center">
+          Trending Topics
+        </Typography>
+        <TopicSuggestor
+          onSuggestion={(suggestion) => {
+            setTopic(`"${suggestion.topic}"`);
+            loadData();
+          }}
+        />
+      </PageSection>
       {data && <TopicSearchResult getTopicResult={data} />}
     </>
   );

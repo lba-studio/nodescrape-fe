@@ -2,6 +2,7 @@ import axios from "axios";
 import { backendUrl, shouldMock } from "../config/constants";
 import getTopicScoreMock from "../mocks/getTopicScoreMock";
 import { OnlineNewsArticle } from "../typedefs";
+import mockAsync from "../utils/mockAsync";
 
 export type GetTopicResult = {
   score: number | null;
@@ -11,7 +12,7 @@ export type GetTopicResult = {
 
 async function searchTopic(topic: string): Promise<GetTopicResult> {
   if (shouldMock) {
-    return Promise.resolve(getTopicScoreMock);
+    return mockAsync(getTopicScoreMock);
   }
   return axios
     .post(backendUrl + "/topic-search", {
