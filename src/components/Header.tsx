@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   siteTitle: {
     flexGrow: 1,
     textAlign: "start",
+    margin: 0,
+    letterSpacing: 1,
+    fontWeight: 600,
   },
   headerItem: {
     margin: theme.spacing(2),
