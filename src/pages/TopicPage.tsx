@@ -53,6 +53,14 @@ const TopicPage: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [displaySuggestions, setDisplaySuggestions] = React.useState(true);
+  React.useEffect(() => {
+    if (isLoading) {
+      TopicService.searchTopic(topic)
+        .then((res) => setData(res))
+        .catch((e) => setError(parseError(e)))
+        .finally(() => setIsLoading(false));
+    }
+  }, [isLoading, topic]);
   const classes = useStyles();
   function onSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,10 +70,6 @@ const TopicPage: React.FC = () => {
     setIsLoading(true);
     setError(null);
     setDisplaySuggestions(false);
-    TopicService.searchTopic(topic)
-      .then((res) => setData(res))
-      .catch((e) => setError(parseError(e)))
-      .finally(() => setIsLoading(false));
   }
   return (
     <>

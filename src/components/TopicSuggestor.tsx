@@ -58,7 +58,7 @@ function TopicSuggestor(props: TopicSuggestorProps) {
       </Typography>
       <Grid container spacing={1} justify="center">
         {data.slice(0, numberOfItemsToDisplayPerRow).map((e) => (
-          <Grid item xs={6} sm={4}>
+          <Grid key={e.topic} item xs={6} sm={4}>
             <Card>
               <CardActionArea onClick={() => onSuggestion && onSuggestion(e)}>
                 <CardMedia
