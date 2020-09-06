@@ -14,6 +14,9 @@ import {
 } from "@material-ui/core";
 import PageSection from "./PageSection";
 import InfoIcon from "@material-ui/icons/Info";
+import { getSentimentScoreLikertValue } from "../utils/sentimentScoreUtil";
+import computeColorHex from "../utils/computeColorHex";
+import SentimentIcon from "./SentimentIcon";
 
 interface TopicSearchResultProps {
   getTopicResult: GetTopicResult;
@@ -25,14 +28,27 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "left",
   },
-  newsArticleCardContainer: {
-    padding: theme.spacing(1),
-  },
   media: {
     height: "128px",
   },
   infoIcon: {
     marginLeft: theme.spacing(1),
+  },
+  sentimentIcon: {
+    fontSize: "5rem",
+    textAlign: "center",
+  },
+  dataCard: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  newsArticleCounter: {
+    fontSize: "7rem",
+    textAlign: "center",
+    fontWeight: 700,
+    lineHeight: 1,
   },
 }));
 
@@ -42,80 +58,102 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
   if (getTopicResult.score === null) {
     return (
       <>
-        <Typography variant="h2">Cannot find news articles</Typography>
-        <Typography>Please try another topic.</Typography>
+        <Typography variant="h2" align="center">
+          Cannot find news articles
+        </Typography>
+        <Typography align="center">Please try another topic.</Typography>
       </>
     );
   }
+  const sentimentScoreLikertValue = getSentimentScoreLikertValue(
+    getTopicResult.score
+  );
   return (
     <>
-      <PageSection fullWidth>
+      <PageSection>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Tooltip
-              title="The average sentiment score of the articles of this topic, with scores closer to 1 indicating that the article is positive, and scores closer to -1 indicating that the article is negative."
-              arrow
-            >
+            <div className={classes.dataCard}>
               <Box
                 display="flex"
-                flexDirection="row"
                 justifyContent="center"
+                flexDirection="column"
                 alignItems="center"
               >
-                <Typography variant="h4">Sentiment Score</Typography>
-                <InfoIcon className={classes.infoIcon} />
+                <SentimentIcon
+                  score={getTopicResult.score}
+                  htmlColor={computeColorHex(getTopicResult.score)}
+                />
+                <Typography
+                  variant="h3"
+                  align="center"
+                  style={{ color: computeColorHex(getTopicResult.score) }}
+                >
+                  {sentimentScoreLikertValue} ({getTopicResult.score.toFixed(2)}
+                  )
+                </Typography>
               </Box>
-            </Tooltip>
-            <Typography variant="h3" align="center">
-              {getTopicResult.score.toFixed(4)}
-            </Typography>
+
+              <Tooltip
+                title="The average sentiment score of the articles of this topic, with scores closer to 1 indicating that the article is positive, and scores closer to -1 indicating that the article is negative."
+                arrow
+              >
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Typography variant="h4" align="center">
+                    Sentiment Score
+                  </Typography>
+                  <InfoIcon className={classes.infoIcon} />
+                </Box>
+              </Tooltip>
+            </div>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant="h4" align="center">
-              News articles analyzed
-            </Typography>
-            <Typography variant="h3" align="center">
-              {getTopicResult.newsArticlesAnalyzed}
-            </Typography>
-          </Grid>
-          <Grid item container xs={12} justify="center">
-            <Grid item xs={12}>
-              <Typography variant="h2" align="center">
-                Sample news articles
+            <div className={classes.dataCard}>
+              <Typography className={classes.newsArticleCounter}>
+                {getTopicResult.newsArticlesAnalyzed}
               </Typography>
-            </Grid>
-            {getTopicResult.sampleAnalyzedArticles
-              .slice(0, 4)
-              .map((article) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  className={classes.newsArticleCardContainer}
-                >
-                  <CardActionArea
-                    className={classes.newsArticleCard}
-                    onClick={() => window.open(article.url, "_blank")}
-                  >
-                    <Card className={classes.newsArticleCard}>
-                      <CardMedia
-                        className={classes.media}
-                        image={article.imageUrl}
-                        title={article.title}
-                      />
-                      <CardHeader
-                        title={article.title}
-                        subheader={article.sourceName}
-                      />
-                      <CardContent>
-                        <Typography>{article.content}</Typography>
-                      </CardContent>
-                    </Card>
-                  </CardActionArea>
-                </Grid>
-              ))}
+              <Typography variant="h4" align="center">
+                News articles analyzed
+              </Typography>
+            </div>
           </Grid>
+        </Grid>
+      </PageSection>
+      <PageSection fullWidth>
+        <Grid item container xs={12} justify="center" spacing={1}>
+          <Grid item xs={12}>
+            <Typography variant="h2" align="center">
+              Sample news articles
+            </Typography>
+          </Grid>
+          {getTopicResult.sampleAnalyzedArticles.slice(0, 4).map((article) => (
+            <Grid item xs={12} sm={6} md={3}>
+              <CardActionArea
+                className={classes.newsArticleCard}
+                onClick={() => window.open(article.url, "_blank")}
+              >
+                <Card className={classes.newsArticleCard}>
+                  <CardMedia
+                    className={classes.media}
+                    image={article.imageUrl}
+                    title={article.title}
+                  />
+                  <CardHeader
+                    title={article.title}
+                    subheader={article.sourceName}
+                  />
+                  <CardContent>
+                    <Typography>{article.content}</Typography>
+                  </CardContent>
+                </Card>
+              </CardActionArea>
+            </Grid>
+          ))}
         </Grid>
       </PageSection>
     </>
