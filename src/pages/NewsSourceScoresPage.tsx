@@ -98,14 +98,19 @@ const HomePage: React.FC = (props) => {
           Is your news source too positive/negative?
         </Typography>
       </PageSection>
-      <PageSection>
-        {(isLoading || !chartLoaded) && <LinearProgress />}
-        {error && (
+
+      {(isLoading || !chartLoaded) && (
+        <PageSection>
+          <LinearProgress />
+        </PageSection>
+      )}
+      {error && (
+        <PageSection>
           <Typography color="error" align="center">
             An error has occurred. Please try again later.
           </Typography>
-        )}
-      </PageSection>
+        </PageSection>
+      )}
       {newsSourceScores &&
         displayedScores &&
         (newsSourceScores.length ? (

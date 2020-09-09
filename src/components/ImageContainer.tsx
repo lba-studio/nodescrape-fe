@@ -40,12 +40,8 @@ function ImageContainer(
   const [isLoading, setIsLoading] = React.useState(true);
   const [hasErrored, setHasErrored] = React.useState(false);
   const classes = { ...useStyles(), ...useVariantStyles() };
-  const {
-    forceFit = true,
-    className,
-    variant = "logo",
-    ...restOfProps
-  } = props;
+  const { forceFit = true, className, variant, ...restOfProps } = props;
+  const variantClass = variant ? classes[variant] : undefined;
   if (hasErrored) {
     return <BlockIcon />;
   }
@@ -66,9 +62,7 @@ function ImageContainer(
           {
             [classes.forceFit]: forceFit,
           },
-          {
-            [classes[variant]]: variant,
-          },
+          variantClass,
           className
         )}
       />
