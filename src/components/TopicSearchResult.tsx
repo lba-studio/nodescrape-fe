@@ -125,7 +125,7 @@ const TopicSearchResult: React.FC<TopicSearchResultProps> = (props) => {
         </Grid>
       </PageSection>
       <PageSection fullWidth>
-        <Grid item container xs={12} justify="center" spacing={1}>
+        <Grid container justify="center" spacing={1}>
           <Grid item xs={12}>
             <Typography variant="h2" align="center">
               Sample news articles

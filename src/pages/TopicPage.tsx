@@ -94,7 +94,6 @@ const TopicPage: React.FC = () => {
             label="Search for a topic"
             margin="normal"
             name="searchTopicQuery"
-            fullWidth
             value={topic}
             onChange={(event) => setTopic(event.target.value as string)}
             variant="outlined"
