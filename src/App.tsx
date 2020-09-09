@@ -10,9 +10,10 @@ import {
 import { appTheme } from "./styles";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import Routing from "./utils/Routing";
 import loadable from "@loadable/component";
+import HomePage from "./pages/HomePage";
 
 const defaultLoadableConfig = {
   fallback: (
@@ -42,38 +43,49 @@ const WelcomeDialog = loadable(() =>
 );
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
   contentRoot: {
-    padding: theme.spacing(4),
-    minHeight: "100%",
+    marginTop: theme.spacing(2),
+    flex: "1 0",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    width: "100%",
   },
 }));
 
-function ContentRoot() {
-  const classes = useStyles();
-  return (
-    <div className={classes.contentRoot}>
-      <WelcomeDialog />
-      <Switch>
-        <Route exact path={["/sources"]} component={NewsSourceScoresPage} />
-        <Route exact path={["/about"]} component={ContributePage} />
-        <Route exact path={["/topics"]} component={TopicPage} />
-        <Route exact path={["/"]}>
-          <Redirect to="/topics" />
-        </Route>
-        <Route component={NotFoundPage} />
-      </Switch>
-      <Footer />
-    </div>
-  );
-}
-
 const App = () => {
+  const classes = useStyles();
   return (
     <MuiThemeProvider theme={appTheme}>
       <Router history={Routing.history}>
         <CssBaseline />
-        <Header />
-        <ContentRoot />
+        <div className={classes.root}>
+          <WelcomeDialog />
+          <Box flex="0 0">
+            <Header />
+          </Box>
+          <div className={classes.contentRoot}>
+            <Switch>
+              <Route
+                exact
+                path={["/sources"]}
+                component={NewsSourceScoresPage}
+              />
+              <Route exact path={["/about"]} component={ContributePage} />
+              <Route exact path={["/topics"]} component={TopicPage} />
+              <Route exact path={["/"]} component={HomePage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
+          <Box flex="0 0">
+            <Footer />
+          </Box>
+        </div>
       </Router>
     </MuiThemeProvider>
   );

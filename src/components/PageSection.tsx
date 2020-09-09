@@ -4,11 +4,14 @@ import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   section: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     maxWidth: "1000px",
     marginLeft: "auto",
     marginRight: "auto",
+    width: "100%",
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
   },
   fullWidth: {
     maxWidth: "100%",

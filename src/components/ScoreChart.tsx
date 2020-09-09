@@ -24,6 +24,7 @@ import getTimePassedString from "../utils/getTimePassedString";
 
 interface ScoreChartProps {
   newsSourceScores: Array<NewsSourceScore>;
+  onLoad?: () => void;
 }
 
 function getDataFromCtx(ctx: Parameters<Chart.Scriptable<any>>[0]): number {
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ScoreChart: React.FC<ScoreChartProps> = function (props) {
-  const { newsSourceScores } = props;
+  const { newsSourceScores, onLoad } = props;
   const chartRef = React.useRef<Chart | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const isMobile = useIsMobile();
@@ -114,6 +115,9 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
           ],
         },
         options: {
+          animation: {
+            onProgress: onLoad,
+          },
           onClick: onBarClick,
           responsive: true,
           maintainAspectRatio: false,
@@ -142,7 +146,7 @@ const ScoreChart: React.FC<ScoreChartProps> = function (props) {
         },
       });
     }
-  }, [newsSourceScores, isMobile, theme, onBarClick]);
+  }, [newsSourceScores, isMobile, theme, onBarClick, onLoad]);
   return (
     <>
       <Typography align="center">

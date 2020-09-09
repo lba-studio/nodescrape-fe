@@ -18,6 +18,11 @@ const useVariantStyles = makeStyles((theme) => ({
     maxHeight: "64px",
     margin: theme.spacing(1),
   },
+  small: {
+    maxWidth: "128px",
+    maxHeight: "128px",
+    margin: theme.spacing(1),
+  },
 }));
 
 interface ImageContainerProps {
@@ -35,7 +40,12 @@ function ImageContainer(
   const [isLoading, setIsLoading] = React.useState(true);
   const [hasErrored, setHasErrored] = React.useState(false);
   const classes = { ...useStyles(), ...useVariantStyles() };
-  const { forceFit = true, className, variant, ...restOfProps } = props;
+  const {
+    forceFit = true,
+    className,
+    variant = "logo",
+    ...restOfProps
+  } = props;
   if (hasErrored) {
     return <BlockIcon />;
   }
@@ -57,7 +67,7 @@ function ImageContainer(
             [classes.forceFit]: forceFit,
           },
           {
-            [classes.logo]: variant,
+            [classes[variant]]: variant,
           },
           className
         )}

@@ -1,5 +1,11 @@
 import PageSection from "../components/PageSection";
-import { Typography, LinearProgress, Box, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  LinearProgress,
+  Box,
+  makeStyles,
+  Collapse,
+} from "@material-ui/core";
 import FilterBox, { Filters } from "../components/FilterBox";
 import ScoreChart from "../components/ScoreChart";
 import AverageNewsScoreCard from "../components/AverageNewsScoreCard";
@@ -29,6 +35,7 @@ const HomePage: React.FC = (props) => {
   > | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<any | null>(null);
+  const [chartLoaded, setChartLoaded] = React.useState(false);
   const [filters, setFilters] = React.useState<Filters>({
     country: "",
     name: "",
@@ -92,7 +99,7 @@ const HomePage: React.FC = (props) => {
         </Typography>
       </PageSection>
       <PageSection>
-        {isLoading && <LinearProgress />}
+        {(isLoading || !chartLoaded) && <LinearProgress />}
         {error && (
           <Typography color="error" align="center">
             An error has occurred. Please try again later.
@@ -102,7 +109,7 @@ const HomePage: React.FC = (props) => {
       {newsSourceScores &&
         displayedScores &&
         (newsSourceScores.length ? (
-          <>
+          <Collapse in={chartLoaded} timeout="auto">
             <PageSection>
               <FilterBox
                 newsSourceScores={newsSourceScores}
@@ -112,7 +119,10 @@ const HomePage: React.FC = (props) => {
             {Boolean(displayedScores.length) ? (
               <>
                 <PageSection>
-                  <ScoreChart newsSourceScores={displayedScores} />
+                  <ScoreChart
+                    onLoad={() => setChartLoaded(true)}
+                    newsSourceScores={displayedScores}
+                  />
                 </PageSection>
                 <PageSection>
                   <Box
@@ -137,7 +147,7 @@ const HomePage: React.FC = (props) => {
                 No matching news sources can be found.
               </Typography>
             )}
-          </>
+          </Collapse>
         ) : (
           <Typography variant="h3" align="center">
             We can't seem to find any data. Please come back again later!
