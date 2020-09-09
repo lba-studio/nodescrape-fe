@@ -20,14 +20,15 @@ const useStyles = makeStyles((theme) => ({
 interface HeaderLinkProps {
   to: string;
   children: React.ReactNode;
+  noHighlight?: boolean;
 }
 
 function HeaderLink(props: HeaderLinkProps) {
-  const { to, children } = props;
+  const { to, children, noHighlight } = props;
   const location = useLocation();
   return (
     <Button
-      color={to === location.pathname ? "primary" : "inherit"}
+      color={to === location.pathname && !noHighlight ? "primary" : "inherit"}
       component={RouterLink}
       to={to}
     >
@@ -42,11 +43,13 @@ const Header: React.FC = () => {
     <AppBar position="sticky" color="default">
       <Toolbar>
         <div className={classes.siteTitle}>
-          <HeaderLink to="/">{siteTitle} (BETA)</HeaderLink>
+          <HeaderLink noHighlight to="/">
+            {siteTitle} (BETA)
+          </HeaderLink>
         </div>
+        <HeaderLink to="/">Home</HeaderLink>
         <HeaderLink to="/topics">Topics</HeaderLink>
         <HeaderLink to="/sources">Sources</HeaderLink>
-        <HeaderLink to="/about">About</HeaderLink>
       </Toolbar>
     </AppBar>
   );
