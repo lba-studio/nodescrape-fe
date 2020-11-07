@@ -16,6 +16,9 @@ import ImageContainer from "../components/ImageContainer";
 import PencilIcon from "../assets/pencil-alt-solid.svg";
 import TopicSuggestor from "../components/TopicSuggestor";
 import clsx from "clsx";
+import { useHistory, useLocation } from "react-router-dom";
+
+const searchQueryKey = "search";
 
 const useStyles = makeStyles((theme) => ({
   topicSearchField: {
@@ -53,23 +56,36 @@ const TopicPage: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [displaySuggestions, setDisplaySuggestions] = React.useState(true);
+  const location = useLocation();
+  const history = useHistory();
+  function loadData() {
+    setIsLoading(true);
+    setError(null);
+    setDisplaySuggestions(false);
+  }
   React.useEffect(() => {
     if (isLoading) {
+      const newSearchValue = new URLSearchParams();
+      newSearchValue.set(searchQueryKey, topic);
+      history.push({ search: newSearchValue.toString() });
       TopicService.searchTopic(topic)
         .then((res) => setData(res))
         .catch((e) => setError(parseError(e)))
         .finally(() => setIsLoading(false));
     }
-  }, [isLoading, topic]);
+  }, [isLoading, topic, history]);
+  React.useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const topicToSearch = query.get(searchQueryKey);
+    if (topicToSearch) {
+      setTopic(topicToSearch);
+      loadData();
+    }
+  }, [location]);
   const classes = useStyles();
   function onSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     loadData();
-  }
-  function loadData() {
-    setIsLoading(true);
-    setError(null);
-    setDisplaySuggestions(false);
   }
   return (
     <>

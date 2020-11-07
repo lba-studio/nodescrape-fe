@@ -14,6 +14,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import Routing from "./utils/Routing";
 import loadable from "@loadable/component";
 import HomePage from "./pages/HomePage";
+import "url-search-params-polyfill";
 
 const defaultLoadableConfig = {
   fallback: (
